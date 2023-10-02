@@ -3,10 +3,11 @@ $white: #EEEEEE;
 $gris: #393E46;
 $dark-gris: #222831;
 
-nav {
+nav, footer {
     width: auto;
     height: 2vh;
     padding: 1em;
+    margin: 0;
     background-color: $dark-gris;
     display: flex;
     flex-direction: row;
