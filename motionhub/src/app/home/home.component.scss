@@ -1,0 +1,53 @@
+$yellow: #FFD369;
+$white: #EEEEEE;
+$gris: #393E46;
+$dark-gris: #222831;
+
+$primary-font: 'Koulen', cursive;
+$text-font: 'Montserrat', sans-serif;
+
+main {
+    width: auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('../../assets/background-main.jpg');
+    background-size: cover;
+    background-position: center;
+  
+    .logo {
+      width: 60vw;
+      height: 20vh;
+      padding: 5rem;
+    }
+
+    .redirect {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .redirect-buttons {
+        width: 10rem;
+        height: 4rem;
+        margin: 2rem;
+        border: 1px solid $yellow;
+        background-color: $dark-gris;
+        text-align: center;
+        transition: border 0.3s;
+      
+        &:hover {
+          border-right: 5px solid $yellow;
+          border-bottom: 5px solid $yellow;
+        }
+      }      
+
+    .links, .movies {
+        font-family: $primary-font;
+        font-size: 2rem;
+        text-decoration: none;
+    }
+  }
+  

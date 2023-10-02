@@ -1,7 +1,11 @@
+$yellow: #FFD369;
+$white: #EEEEEE;
+$gris: #393E46;
+$dark-gris: #222831;
+
 * {
     margin: 0;
     padding: 0;
     border: 0;
-    background-color: #393E46;
-    color: #EEEEEE;
+    color: $white;
 }

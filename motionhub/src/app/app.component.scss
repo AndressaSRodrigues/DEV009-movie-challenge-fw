@@ -1,8 +1,13 @@
+$yellow: #FFD369;
+$white: #EEEEEE;
+$gris: #393E46;
+$dark-gris: #222831;
+
 nav {
     width: auto;
     height: 2vh;
     padding: 1em;
-    background-color: #222831;
+    background-color: $dark-gris;
     display: flex;
     flex-direction: row;
     align-items: center;
