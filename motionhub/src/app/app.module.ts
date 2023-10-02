@@ -3,9 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { MoviesComponent } from './movies/movies.component';
-import { TvshowsComponent } from './tvshows/tvshows.component';
+import { HomeComponent } from './components/home/home.component';
+import { MoviesComponent } from './components/movies/movies.component';
+import { TvshowsComponent } from './components/tvshows/tvshows.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { TvshowsComponent } from './tvshows/tvshows.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
