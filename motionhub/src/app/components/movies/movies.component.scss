@@ -34,13 +34,25 @@ $text-font: 'Montserrat', sans-serif;
             display: flex;
             flex-direction: column;
             position: absolute;
-            top: 11rem;
-            left: 1.9rem;
+            top: 12rem;
+            left: 1.5rem;
             padding: 1rem;
             font-size: 2rem;
             background-color: $gray;
             border-bottom: 5px solid $yellow;
             border-right: 5px solid $yellow;
+
+            .btn, .active {
+                font-family: $primary-font;
+                font-size: 2rem;
+                background: none;
+                cursor: pointer;
+
+                a {
+                    text-decoration: none;
+                }
+            }
+
         }
 
     }
@@ -58,7 +70,7 @@ $text-font: 'Montserrat', sans-serif;
     }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1560px) {
     .movies-component {
         .title-options {
             h1 {
@@ -67,14 +79,23 @@ $text-font: 'Montserrat', sans-serif;
 
             .options-container {
                 flex-direction: row;
-                top: 12vh;
-                left: 38vw;
+                top: 13vh;
+                left: 28vw;
                 border-bottom: 0;
                 border-right: 0;
                 background: none;
                 
-                a {
+                .btn, .active {
                     margin-left: 5rem;
+                }
+
+                .active {
+                    color: $yellow;
+                    text-decoration: overline;
+                }
+
+                .btn:hover, a:hover {
+                    color: $yellow;
                 }
             }
         }
