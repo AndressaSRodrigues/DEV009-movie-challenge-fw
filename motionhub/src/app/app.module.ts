@@ -20,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [], // using @Injectable instead
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

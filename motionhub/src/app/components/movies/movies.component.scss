@@ -1,21 +1,48 @@
 $yellow: #FFD369;
 $white: #EEEEEE;
-$gris: #393E46;
-$dark-gris: #222831;
+$gray: #333333;
+$dark-gray: #151515;
 
 $primary-font: 'Koulen', cursive;
 $text-font: 'Montserrat', sans-serif;
 
-main {
+.movies-component {
     height: auto;
-    background-color: $gris;
+    background-color: $gray;
     color: $white;
     font-family: $primary-font;
 
-    h1 {
-        color: $yellow;
-        font-size: 4rem;
-        margin-left: 2rem;
+    .title-options {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: center;
+        width: 80vw;
+
+        h1 {
+            color: $yellow;
+            font-size: 4rem;
+            margin: 2rem 0 0 2rem;
+        }
+
+        .options-icon {
+            margin: 2rem 0 0 2rem;
+            cursor: pointer;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 11rem;
+            left: 1.9rem;
+            padding: 1rem;
+            font-size: 2rem;
+            background-color: $gray;
+            border-bottom: 5px solid $yellow;
+            border-right: 5px solid $yellow;
+        }
+
     }
 
     .movies-container {
@@ -26,20 +53,35 @@ main {
         margin: 1rem;
     }
 
-    .movies-posters{
+    .movies-posters {
         margin: 0.5rem;
     }
 }
 
-@media (min-width: 901px) {
-    main {
+@media (min-width: 1280px) {
+    .movies-component {
+        .title-options {
+            h1 {
+                margin: 3rem 0 0 23rem;
+            }
 
-        h1 {
-            margin-left: 11rem;
+            .options-container {
+                flex-direction: row;
+                top: 12vh;
+                left: 38vw;
+                border-bottom: 0;
+                border-right: 0;
+                background: none;
+                
+                a {
+                    margin-left: 5rem;
+                }
+            }
         }
 
         .movies-container {
-            margin: 0 5rem;
+            margin-left: 20rem;
+            margin-right: 20rem;
         }
     }
 }

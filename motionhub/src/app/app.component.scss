@@ -1,19 +1,58 @@
 $yellow: #FFD369;
 $white: #EEEEEE;
-$gris: #393E46;
-$dark-gris: #222831;
+$gray: #333333;
+$dark-gray: #151515;
 
-body {
-    background-color: $gris;
+$primary-font: 'Koulen', cursive;
+$text-font: 'Montserrat', sans-serif;
+
+main {
+    background-color: $gray;
 }
 
-nav, footer {
+nav {
     width: auto;
     height: 2vh;
     padding: 1em;
     margin: 0;
-    background-color: $dark-gris;
+    background-color: $dark-gray;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: left;
+    font-family: $primary-font;
+    font-size: 1.5rem;
+
+    .search-bar {
+        display: flex;
+        justify-content: center;
+        width: 50vw;
+        background-color: $gray;
+        border: 1px solid $yellow;
+        padding: 0.2rem;
+        margin-left: 5rem;
+    
+        .search {
+            width: 50vw;
+            height: 3vh;
+            background: none;
+            color: $yellow;
+        }
+
+        img {
+            padding: 4px;
+        }
+    }
+}
+
+footer {
+    background-color: $dark-gray;
+}
+
+@media (min-width: 1311px) {
+    nav {
+        .search-bar, .search{
+            width: 15vw;
+        } 
+    }
 }

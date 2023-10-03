@@ -1,19 +1,19 @@
 $yellow: #FFD369;
 $white: #EEEEEE;
-$gris: #393E46;
-$dark-gris: #222831;
+$gray: #333333;
+$dark-gray: #151515;
 
 $primary-font: 'Koulen', cursive;
 $text-font: 'Montserrat', sans-serif;
 
-main {
+.home-main {
     width: auto;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    background-image: url('../../../assets/background-main.jpg');
+    background-image: url('../../../assets/background-main2.png');
     background-size: cover;
     background-position: center;
     font-family: $primary-font;
@@ -43,13 +43,15 @@ main {
         height: 4rem;
         margin: 2rem;
         border: 1px solid $yellow;
-        background-color: $dark-gris;
+        background-color: $dark-gray;
         text-align: center;
         transition: border 0.3s;
 
         &:hover {
-            border-right: 5px solid $yellow;
-            border-bottom: 5px solid $yellow;
+            border-top: 0;
+            border-left: 0;
+            border-right: 6px solid $yellow;
+            border-bottom: 6px solid $yellow;
         }
     }
 
@@ -61,7 +63,7 @@ main {
 }
 
 @media (min-width: 901px) {
-    main {
+    .home-main {
         .redirect {
             display: flex;
             flex-direction: row;

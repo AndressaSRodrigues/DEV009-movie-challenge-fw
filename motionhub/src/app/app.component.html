@@ -1,17 +1,19 @@
-<body>
-  <nav class="navbar" role="banner">
+<nav class="navbar" role="banner">
     <a href="/home">
-      <img
-      width="40"
-      alt="MotionHub Logo"
-      src="../assets/mhicon.png"
-    />
+      <img width="40" alt="MotionHub Logo" src="../assets/mhicon.png" />
     </a>
-  </nav>
-  
+
+    <div class="search-bar" *ngIf="isSearchActive()">
+      <input type="text" placeholder="Search..." class="search"/>
+      <img src="../assets/search-icon.svg" alt="Seach icon" width="20" />
+    </div>
+
+</nav>
+
+<main>
   <router-outlet></router-outlet>
-  
-  <footer>
-    © MotionHub
-  </footer>
-</body>
+</main>
+
+<footer>
+  © MotionHub
+</footer>
