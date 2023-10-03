@@ -1,14 +1,17 @@
 <main>
     <section class="title-options">
         <h1>Movies</h1>
-        <a>Browse by genre</a>
+<!--    <a>Browse by genre</a>
         <a>Top Rated</a>
-        <a>New and popular</a>
+        <a>New and popular</a> -->
     </section>
-    
-    <section class="movie-card">
-        
-    
-    </section>
-</main>
 
+    <div class="movies-container">
+        <div *ngFor="let movie of popularMovies" class="movies-posters">
+            <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" 
+                alt="{{ movie.title }} Poster"
+                width="180" />
+        </div>
+    </div>
+
+</main>
