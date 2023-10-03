@@ -16,8 +16,8 @@ export class MoviesComponent implements OnInit {
     this.moviesService.getPopularMovies()
     .subscribe((response: any) => {
       this.popularMovies = response.results;
+      const poster = response.poter_path;
       console.log(this.popularMovies)
     });
   }
-
 }

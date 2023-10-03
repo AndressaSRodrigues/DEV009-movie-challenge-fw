@@ -3,7 +3,43 @@ $white: #EEEEEE;
 $gris: #393E46;
 $dark-gris: #222831;
 
+$primary-font: 'Koulen', cursive;
+$text-font: 'Montserrat', sans-serif;
+
 main {
+    height: auto;
     background-color: $gris;
     color: $white;
+    font-family: $primary-font;
+
+    h1 {
+        color: $yellow;
+        font-size: 4rem;
+        margin-left: 2rem;
+    }
+
+    .movies-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 1rem;
+    }
+
+    .movies-posters{
+        margin: 0.5rem;
+    }
+}
+
+@media (min-width: 901px) {
+    main {
+
+        h1 {
+            margin-left: 11rem;
+        }
+
+        .movies-container {
+            margin: 0 5rem;
+        }
+    }
 }
