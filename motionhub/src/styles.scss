@@ -1,7 +1,11 @@
 $yellow: #FFD369;
 $white: #EEEEEE;
-$gris: #393E46;
-$dark-gris: #222831;
+$gray: #333333;
+$dark-gray: #151515;
+
+body {
+    background-color: $gray;
+}
 
 * {
     margin: 0;

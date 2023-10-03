@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { MoviesService } from 'src/app/service/movies.service';
 
 @Component({
@@ -8,16 +8,32 @@ import { MoviesService } from 'src/app/service/movies.service';
 })
 
 export class MoviesComponent implements OnInit {
-  popularMovies: any[] = [];
-  
-  constructor(private moviesService: MoviesService) {}
+  showOptions = false;
+  isMobile = true;
 
-  ngOnInit(): void {
+  toggleOptions() {
+    this.showOptions = !this.showOptions;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    this.isMobile = window.innerWidth <= 1280;
+  }
+
+  popularMovies: any[] = [];
+
+  constructor(private moviesService: MoviesService) { }
+  /*   'private' indicates the parameter should be accessible only inside the class
+        indicates it's required for the component to work
+   */
+
+  ngOnInit(): void { // 'void' indicates that a function doesn't return any value
     this.moviesService.getPopularMovies()
-    .subscribe((response: any) => {
-      this.popularMovies = response.results;
-      const poster = response.poter_path;
-      console.log(this.popularMovies)
-    });
+      .subscribe(
+        (response: any): void => {
+          this.popularMovies = response.results;
+          console.log(this.popularMovies)
+        }
+      );
   }
 }
