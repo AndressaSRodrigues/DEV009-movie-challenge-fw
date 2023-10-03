@@ -9,7 +9,9 @@ import { MoviesService } from 'src/app/service/movies.service';
 
 export class MoviesComponent implements OnInit {
   showOptions = false;
-  isMobile = true;
+  isMobile = false;
+  setVisiblePopularMovies = true;
+  setVisibleUpcomingMovies = false;
 
   toggleOptions() {
     this.showOptions = !this.showOptions;
@@ -17,10 +19,11 @@ export class MoviesComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
-    this.isMobile = window.innerWidth <= 1280;
+    this.isMobile = window.innerWidth <= 1560;
   }
 
   popularMovies: any[] = [];
+  upcomingMovies: any[] = [];
 
   constructor(private moviesService: MoviesService) { }
   /*   'private' indicates the parameter should be accessible only inside the class
@@ -35,5 +38,17 @@ export class MoviesComponent implements OnInit {
           console.log(this.popularMovies)
         }
       );
+  }
+
+  displayUpcomingMovies() {
+    this.moviesService.getUpcomingMovies()
+    .subscribe(
+      (response: any): void => {
+        this.upcomingMovies = response.results;
+        console.log(this.upcomingMovies);
+      }
+    )
+    this.setVisiblePopularMovies = false;
+    this.setVisibleUpcomingMovies =  true;
   }
 }

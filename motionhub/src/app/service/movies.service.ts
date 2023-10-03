@@ -18,4 +18,9 @@ export class MoviesService {
     return this.http.get(url)
   }
 
+  getUpcomingMovies(): Observable<any> {
+    const url = `${this.apiUrl}/movie/upcoming?api_key=${this.apiKey}`;
+    return this.http.get(url)
+  }
+
 }
