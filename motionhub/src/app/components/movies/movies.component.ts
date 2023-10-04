@@ -30,14 +30,14 @@ export class MoviesComponent implements OnInit {
   setVisiblePopularMovies = true;
   setVisibleUpcomingMovies = false;
   setVisibleTopRatedMovies = false;
+  genresMenu = false;
 
   toggleOptions() {
     this.showOptions = !this.showOptions;
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any): void {
-    this.isMobile = window.innerWidth <= 1560;
+  toggleGenresMenu() {
+    this.genresMenu = !this.genresMenu;
   }
 
   popularMovies: Movie[] = [];
@@ -46,16 +46,24 @@ export class MoviesComponent implements OnInit {
   genreTitles: Genres[] = [];
 
   constructor(private moviesService: MoviesService) { }
-  /*   'private' indicates the parameter should be accessible only inside the class
-        indicates it's required for the component to work
-   */
 
-  ngOnInit(): void { // 'void' indicates that a function doesn't return any value
+  ngOnInit(): void {
+    this.displayPopuplarMovies();
+    this.displayGenres();
+  }
+
+  displayPopuplarMovies() {
     this.moviesService.getPopularMovies()
       .subscribe(
         (response: { results: Movie[] }): void => {
           this.popularMovies = response.results;
           console.log(this.popularMovies)
+          this.setVisiblePopularMovies = true;
+          this.setVisibleTopRatedMovies = false;
+          this.genresMenu = false;
+          console.log(this.showOptions)
+          this.setVisibleUpcomingMovies = false;
+          this.showOptions = false;
         }
       );
   }
@@ -67,8 +75,10 @@ export class MoviesComponent implements OnInit {
           this.upcomingMovies = response.results;
           console.log(this.upcomingMovies);
           this.setVisiblePopularMovies = false;
-          this.setVisibleUpcomingMovies = true;
           this.setVisibleTopRatedMovies = false;
+          this.genresMenu = false;
+          this.setVisibleUpcomingMovies = true;
+          this.showOptions = false;
         }
       )
   }
@@ -81,12 +91,14 @@ export class MoviesComponent implements OnInit {
           console.log(this.topRatedMovies);
           this.setVisiblePopularMovies = false;
           this.setVisibleUpcomingMovies = false;
+          this.genresMenu = false;
           this.setVisibleTopRatedMovies = true;
+          this.showOptions = false;
         }
       )
   }
 
-  displayGenreTitles() {
+  displayGenres() {
     this.moviesService.getGenres()
       .subscribe(
         (response: { genres: Genres[] }): void => {
@@ -94,6 +106,44 @@ export class MoviesComponent implements OnInit {
           this.genreTitles = response.genres;
         }
       );
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    this.isMobile = window.innerWidth <= 1560;
+  }
+
+  @HostListener('window:click', ['$event'])
+  onClick(event: MouseEvent): void {
+    const clickedElement = event.target as HTMLElement;
+    const isClickInsideOptionsIcon = clickedElement.classList.contains('options-icon');
+    const isClickOutsideMenus = !this.isDescendantOfGenresMenu(clickedElement) &&
+      !this.isDescendantOfOptionsContainer(clickedElement);
+
+    if (!isClickInsideOptionsIcon && isClickOutsideMenus) {
+      this.genresMenu = false;
+      this.showOptions = false;
+    }
+  }
+
+  private isDescendantOfGenresMenu(element: HTMLElement): boolean {
+    if (!element) {
+      return false;
+    }
+    if (element.classList.contains('genres-menu')) {
+      return true;
+    }
+    return this.isDescendantOfGenresMenu(element.parentElement as HTMLElement);
+  }
+
+  private isDescendantOfOptionsContainer(element: HTMLElement): boolean {
+    if (!element) {
+      return false;
+    }
+    if (element.classList.contains('options-container')) {
+      return true;
+    }
+    return this.isDescendantOfOptionsContainer(element.parentElement as HTMLElement);
   }
 
 }

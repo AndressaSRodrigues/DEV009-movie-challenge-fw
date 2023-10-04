@@ -45,7 +45,7 @@ $text-font: 'Montserrat', sans-serif;
             left: 1.5rem;
             padding: 1rem;
             font-size: 2rem;
-            background-color: $gray;
+            background-color: $dark-gray;
             border-bottom: 5px solid $yellow;
             border-right: 5px solid $yellow;
 
@@ -54,12 +54,31 @@ $text-font: 'Montserrat', sans-serif;
                 font-size: 2rem;
                 background: none;
                 cursor: pointer;
-
-                a {
-                    text-decoration: none;
-                }
             }
 
+        }
+
+        .genres-menu {
+            @include column;
+            position: absolute;
+            left: 55vw;
+            top: 12rem;
+            width: 35vw;
+            height: auto;
+            padding: 1rem 1rem 0 1rem;
+            background-color: $dark-gray;
+            border-right: 5px $yellow solid;
+            border-bottom: 5px $yellow solid;
+            font-size: 1.5rem;
+
+            .genres-title {
+                width: 30vw;
+                height: 35vh;
+
+                span {
+                    padding: 2rem;
+                }
+            }
         }
 
     }
@@ -83,6 +102,7 @@ $text-font: 'Montserrat', sans-serif;
 
 @media (min-width: 1560px) {
     .movies-component {
+
         .title-options {
             h1 {
                 margin: 3rem 0 0 23rem;
@@ -107,6 +127,26 @@ $text-font: 'Montserrat', sans-serif;
 
                 .btn:hover, a:hover {
                     color: $yellow;
+                }
+            }
+
+            .genres-menu {
+                flex-wrap: wrap;
+                left: 46.5vw;
+                top: 20vh;
+                width: 35vw;
+                height: 35vh;
+                padding: 1rem 1rem 0 1rem;
+                background-color: $dark-gray;
+                font-size: 2rem;
+    
+                .genres-title {
+                    width: 35vw;
+                    height: 35vh;
+    
+                    span {
+                        padding: 2rem;
+                    }
                 }
             }
         }
