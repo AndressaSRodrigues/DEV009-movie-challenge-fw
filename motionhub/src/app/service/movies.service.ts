@@ -29,6 +29,22 @@ export class MoviesService {
     );
   }
 
+  getTopRatedMovies(): Observable<any> {
+    const url = `${this.apiUrl}/movie/top_rated?api_key=${this.apiKey}`;
+    return this.http.get(url)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getGenres(): Observable<any> {
+    const url = `${this.apiUrl}/genre/movie/list?api_key=${this.apiKey}`;
+    return this.http.get(url)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error('An error occurred:', error.error);
