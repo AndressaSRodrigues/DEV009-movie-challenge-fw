@@ -9,7 +9,7 @@
         <div class="options-container" *ngIf="showOptions || !isMobile">
             <a href="/movies"><button [ngClass]="setVisiblePopularMovies ? 'active' : 'btn'">New & popular</button></a>
             <button class="btn">Browse by genre</button>
-            <button class="btn">Top Rated</button>
+            <button [ngClass]="setVisibleTopRatedMovies ? 'active' : 'btn'" (click)="displayTopRatedMovies()">Top Rated</button>
             <button [ngClass]="setVisibleUpcomingMovies ? 'active' : 'btn'" (click)="displayUpcomingMovies()">Upcoming</button>
         </div>
     </section>
@@ -20,8 +20,14 @@
         </div>
     </section>
 
-    <section *ngIf="!setVisiblePopularMovies" class="movies-container">
+    <section *ngIf="!setVisiblePopularMovies && !setVisibleTopRatedMovies" class="movies-container">
         <div *ngFor="let movie of upcomingMovies" class="movies-posters">
+            <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" [alt]="movie.title" width="180" />
+        </div>
+    </section>
+
+    <section *ngIf="!setVisiblePopularMovies && !setVisibleUpcomingMovies" class="movies-container">
+        <div *ngFor="let movie of topRatedMovies" class="movies-posters">
             <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" [alt]="movie.title" width="180" />
         </div>
     </section>

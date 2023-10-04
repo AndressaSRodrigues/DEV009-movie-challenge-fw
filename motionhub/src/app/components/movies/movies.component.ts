@@ -23,6 +23,7 @@ export class MoviesComponent implements OnInit {
   isMobile = false;
   setVisiblePopularMovies = true;
   setVisibleUpcomingMovies = false;
+  setVisibleTopRatedMovies = false;
 
   toggleOptions() {
     this.showOptions = !this.showOptions;
@@ -35,6 +36,7 @@ export class MoviesComponent implements OnInit {
 
   popularMovies: Movie[] = [];
   upcomingMovies: Movie[] = [];
+  topRatedMovies: Movie[] = [];
 
   constructor(private moviesService: MoviesService) { }
   /*   'private' indicates the parameter should be accessible only inside the class
@@ -59,6 +61,20 @@ export class MoviesComponent implements OnInit {
         console.log(this.upcomingMovies);
         this.setVisiblePopularMovies = false;
         this.setVisibleUpcomingMovies =  true;
+        this.setVisibleTopRatedMovies = false;
+      }
+    )
+  }
+
+  displayTopRatedMovies() {
+    this.moviesService.getTopRatedMovies()
+    .subscribe(
+      (response: { results: Movie[]} ): void => {
+        this.topRatedMovies = response.results;
+        console.log(this.topRatedMovies);
+        this.setVisiblePopularMovies = false;
+        this.setVisibleUpcomingMovies =  false;
+        this.setVisibleTopRatedMovies = true;
       }
     )
   }
