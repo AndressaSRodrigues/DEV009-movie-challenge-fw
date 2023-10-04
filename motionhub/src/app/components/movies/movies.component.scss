@@ -2,9 +2,14 @@ $yellow: #FFD369;
 $white: #EEEEEE;
 $gray: #333333;
 $dark-gray: #151515;
-
 $primary-font: 'Koulen', cursive;
 $text-font: 'Montserrat', sans-serif;
+
+@mixin row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 
 .movies-component {
     height: auto;
@@ -13,9 +18,7 @@ $text-font: 'Montserrat', sans-serif;
     font-family: $primary-font;
 
     .title-options {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        @include row;
         align-content: center;
         width: 80vw;
 
@@ -58,9 +61,7 @@ $text-font: 'Montserrat', sans-serif;
     }
 
     .movies-container {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        @include row;
         justify-content: center;
         margin: 1rem;
     }

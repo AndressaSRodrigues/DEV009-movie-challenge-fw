@@ -46,10 +46,22 @@ nav {
 }
 
 footer {
-    background-color: $dark-gray;
+    height: 5vh;
+    background-color: $gray;
+    display: flex;
+    justify-content: center;
+    
+    span {
+        color: $dark-gray;
+        font-family: $primary-font;
+    }
+
+    a {
+        margin-left: 1rem;
+    }
 }
 
-@media (min-width: 1311px) {
+@media (min-width: 1560px) {
     nav {
         .search-bar, .search{
             width: 15vw;

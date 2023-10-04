@@ -62,7 +62,7 @@ $text-font: 'Montserrat', sans-serif;
     }
 }
 
-@media (min-width: 901px) {
+@media (min-width: 1560px) {
     .home-main {
         .redirect {
             display: flex;
@@ -72,7 +72,7 @@ $text-font: 'Montserrat', sans-serif;
         }
 
         .slogan {
-            font-size: 2rem;
+            font-size: 3rem;
             padding-bottom: 3rem;
         }
     }
