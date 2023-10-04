@@ -11,6 +11,11 @@ $text-font: 'Montserrat', sans-serif;
     flex-wrap: wrap;
 }
 
+@mixin column {
+    display: flex;
+    flex-direction: column;
+}
+
 .movies-component {
     height: auto;
     background-color: $gray;
@@ -34,8 +39,7 @@ $text-font: 'Montserrat', sans-serif;
         }
 
         .options-container {
-            display: flex;
-            flex-direction: column;
+            @include column;
             position: absolute;
             top: 12rem;
             left: 1.5rem;
@@ -66,8 +70,14 @@ $text-font: 'Montserrat', sans-serif;
         margin: 1rem;
     }
 
-    .movies-posters {
+    .movies {
+        @include column;
         margin: 0.5rem;
+
+        span {
+            font-size: 2rem;
+            color: $yellow;
+        }
     }
 }
 

@@ -8,8 +8,14 @@ interface Movie {
   poster_path: string;
   overview: string;
   popularity: number;
+  vote_average: number;
   release_date: string;
   optional?: any; // an example of optional properties
+}
+
+interface Genres {
+  id: number,
+  name: string,
 }
 
 @Component({
@@ -37,6 +43,7 @@ export class MoviesComponent implements OnInit {
   popularMovies: Movie[] = [];
   upcomingMovies: Movie[] = [];
   topRatedMovies: Movie[] = [];
+  genreTitles: Genres[] = [];
 
   constructor(private moviesService: MoviesService) { }
   /*   'private' indicates the parameter should be accessible only inside the class
@@ -55,27 +62,38 @@ export class MoviesComponent implements OnInit {
 
   displayUpcomingMovies() {
     this.moviesService.getUpcomingMovies()
-    .subscribe(
-      (response: { results: Movie[]} ): void => {
-        this.upcomingMovies = response.results;
-        console.log(this.upcomingMovies);
-        this.setVisiblePopularMovies = false;
-        this.setVisibleUpcomingMovies =  true;
-        this.setVisibleTopRatedMovies = false;
-      }
-    )
+      .subscribe(
+        (response: { results: Movie[] }): void => {
+          this.upcomingMovies = response.results;
+          console.log(this.upcomingMovies);
+          this.setVisiblePopularMovies = false;
+          this.setVisibleUpcomingMovies = true;
+          this.setVisibleTopRatedMovies = false;
+        }
+      )
   }
 
   displayTopRatedMovies() {
     this.moviesService.getTopRatedMovies()
-    .subscribe(
-      (response: { results: Movie[]} ): void => {
-        this.topRatedMovies = response.results;
-        console.log(this.topRatedMovies);
-        this.setVisiblePopularMovies = false;
-        this.setVisibleUpcomingMovies =  false;
-        this.setVisibleTopRatedMovies = true;
-      }
-    )
+      .subscribe(
+        (response: { results: Movie[] }): void => {
+          this.topRatedMovies = response.results;
+          console.log(this.topRatedMovies);
+          this.setVisiblePopularMovies = false;
+          this.setVisibleUpcomingMovies = false;
+          this.setVisibleTopRatedMovies = true;
+        }
+      )
   }
+
+  displayGenreTitles() {
+    this.moviesService.getGenres()
+      .subscribe(
+        (response: { genres: Genres[] }): void => {
+          console.log(response);
+          this.genreTitles = response.genres;
+        }
+      );
+  }
+
 }
