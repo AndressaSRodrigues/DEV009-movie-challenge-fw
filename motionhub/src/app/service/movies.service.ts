@@ -45,6 +45,14 @@ export class MoviesService {
     );
   }
 
+  getMoviesByGenre(genreId: number): Observable<any> {
+    const url = `${this.apiUrl}/discover/movie?api_key=${this.apiKey}&with_genres=${genreId}`;
+    return this.http.get(url)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error('An error occurred:', error.error);
