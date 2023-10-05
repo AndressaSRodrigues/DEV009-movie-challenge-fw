@@ -53,6 +53,14 @@ export class MoviesService {
     );
   }
 
+  getSearch(query: string): Observable<any> {
+    const url = `${this.apiUrl}/search/multi?api_key=${this.apiKey}&query=${query}`;
+    return this.http.get(url)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error('An error occurred:', error.error);
