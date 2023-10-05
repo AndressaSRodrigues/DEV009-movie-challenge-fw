@@ -7,10 +7,18 @@
             *ngIf="isMobile" />
 
         <div class="options-container" *ngIf="showOptions || !isMobile">
-            <a href="/movies"><button [ngClass]="setVisiblePopularMovies ? 'active' : 'btn'">New & popular</button></a>
-            <button class="btn" (click)="displayGenreTitles()">Browse by genre</button>
-            <button [ngClass]="setVisibleTopRatedMovies ? 'active' : 'btn'" (click)="displayTopRatedMovies()">Top Rated</button>
-            <button [ngClass]="setVisibleUpcomingMovies ? 'active' : 'btn'" (click)="displayUpcomingMovies()">Upcoming</button>
+            <button [ngClass]="setVisiblePopularMovies && !genresMenu ? 'active' : 'btn'" (click)="displayPopuplarMovies()">New & popular</button>
+            <button [ngClass]="genresMenu ? 'active' : 'btn'" (click)="toggleGenresMenu()">Browse by genre</button>
+            <button [ngClass]="setVisibleTopRatedMovies && !genresMenu ? 'active' : 'btn'" (click)="displayTopRatedMovies()">Top Rated</button>
+            <button [ngClass]="setVisibleUpcomingMovies && !genresMenu ? 'active' : 'btn'" (click)="displayUpcomingMovies()">Upcoming</button>
+        </div>
+
+        <div class="genres-menu" *ngIf="genresMenu">
+            <div *ngFor="let genre of genreTitles">
+                <div class="genres-titles">
+                    <span>{{ genre.name }}</span>
+                </div>
+            </div>
         </div>
     </section>
 
