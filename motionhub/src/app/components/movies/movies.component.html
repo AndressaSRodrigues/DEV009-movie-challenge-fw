@@ -8,7 +8,7 @@
 
         <div class="options-container" *ngIf="showOptions || !isMobile">
             <button [ngClass]="setVisiblePopularMovies && !genresMenu ? 'active' : 'btn'" (click)="displayPopuplarMovies()">New & popular</button>
-            <button [ngClass]="genresMenu ? 'active' : 'btn'" (click)="toggleGenresMenu()">Browse by genre</button>
+            <button [ngClass]="genresMenu || setVisibleFilterByGenre ? 'active' : 'btn'" (click)="toggleGenresMenu()">Browse by genre</button>
             <button [ngClass]="setVisibleTopRatedMovies && !genresMenu ? 'active' : 'btn'" (click)="displayTopRatedMovies()">Top Rated</button>
             <button [ngClass]="setVisibleUpcomingMovies && !genresMenu ? 'active' : 'btn'" (click)="displayUpcomingMovies()">Upcoming</button>
         </div>
@@ -16,28 +16,39 @@
         <div class="genres-menu" *ngIf="genresMenu">
             <div *ngFor="let genre of genreTitles">
                 <div class="genres-titles">
-                    <span>{{ genre.name }}</span>
+                    <span (click)="filterByGenre(genre.id)">{{ genre.name }}</span>
                 </div>
             </div>
         </div>
     </section>
 
     <section *ngIf="setVisiblePopularMovies" class="movies-container">
+        <h2>New & Popular <hr></h2>
         <div *ngFor="let movie of popularMovies" class="movies">
             <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" [alt]="movie.title" width="180" />
         </div>
     </section>
 
-    <section *ngIf="!setVisiblePopularMovies && !setVisibleTopRatedMovies" class="movies-container">
+    <section *ngIf="!setVisiblePopularMovies && !setVisibleTopRatedMovies && !setVisibleFilterByGenre" class="movies-container">
+        <h2>Upcoming <hr></h2>
         <div *ngFor="let movie of upcomingMovies" class="movies">
             <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" [alt]="movie.title" width="180" />
         </div>
     </section>
 
-    <section *ngIf="!setVisiblePopularMovies && !setVisibleUpcomingMovies" class="movies-container">
+    <section *ngIf="!setVisiblePopularMovies && !setVisibleUpcomingMovies && !setVisibleFilterByGenre" class="movies-container">
+        <h2>Top Rated <hr></h2>
         <div *ngFor="let movie of topRatedMovies" class="movies">
             <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" [alt]="movie.title" width="180" />
             <span><img src="../../../assets/star.png" alt="Rates" width="20" /> {{ movie.vote_average }}</span>
+        </div>
+    </section>
+
+    <section *ngIf="!setVisiblePopularMovies && !setVisibleUpcomingMovies && !setVisibleTopRatedMovies" class="movies-container">
+        <h2>{{ selectedGenreName }} <hr></h2>
+
+        <div *ngFor="let movie of filteredMovies" class="movies">
+            <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" [alt]="movie.title" width="180" />
         </div>
     </section>
 

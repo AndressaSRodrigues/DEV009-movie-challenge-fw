@@ -30,6 +30,7 @@ export class MoviesComponent implements OnInit {
   setVisiblePopularMovies = true;
   setVisibleUpcomingMovies = false;
   setVisibleTopRatedMovies = false;
+  setVisibleFilterByGenre =  false;
   genresMenu = false;
 
   toggleOptions() {
@@ -44,6 +45,9 @@ export class MoviesComponent implements OnInit {
   upcomingMovies: Movie[] = [];
   topRatedMovies: Movie[] = [];
   genreTitles: Genres[] = [];
+  selectedGenre: number | null = null;
+  selectedGenreName: string | null = null;
+  filteredMovies: Movie[] = [];
 
   constructor(private moviesService: MoviesService) { }
 
@@ -57,13 +61,12 @@ export class MoviesComponent implements OnInit {
       .subscribe(
         (response: { results: Movie[] }): void => {
           this.popularMovies = response.results;
-          console.log(this.popularMovies)
           this.setVisiblePopularMovies = true;
           this.setVisibleTopRatedMovies = false;
-          this.genresMenu = false;
-          console.log(this.showOptions)
           this.setVisibleUpcomingMovies = false;
+          this.setVisibleFilterByGenre =  false;
           this.showOptions = false;
+          this.genresMenu = false;
         }
       );
   }
@@ -73,12 +76,12 @@ export class MoviesComponent implements OnInit {
       .subscribe(
         (response: { results: Movie[] }): void => {
           this.upcomingMovies = response.results;
-          console.log(this.upcomingMovies);
+          this.setVisibleUpcomingMovies = true;
           this.setVisiblePopularMovies = false;
           this.setVisibleTopRatedMovies = false;
-          this.genresMenu = false;
-          this.setVisibleUpcomingMovies = true;
+          this.setVisibleFilterByGenre = false;
           this.showOptions = false;
+          this.genresMenu = false;
         }
       )
   }
@@ -88,12 +91,12 @@ export class MoviesComponent implements OnInit {
       .subscribe(
         (response: { results: Movie[] }): void => {
           this.topRatedMovies = response.results;
-          console.log(this.topRatedMovies);
+          this.setVisibleTopRatedMovies = true;
           this.setVisiblePopularMovies = false;
           this.setVisibleUpcomingMovies = false;
-          this.genresMenu = false;
-          this.setVisibleTopRatedMovies = true;
+          this.setVisibleFilterByGenre = false;
           this.showOptions = false;
+          this.genresMenu = false;
         }
       )
   }
@@ -102,10 +105,28 @@ export class MoviesComponent implements OnInit {
     this.moviesService.getGenres()
       .subscribe(
         (response: { genres: Genres[] }): void => {
-          console.log(response);
           this.genreTitles = response.genres;
         }
       );
+  }
+
+  filterByGenre(genreId: number): void {
+    this.selectedGenre = genreId;
+    this.moviesService.getMoviesByGenre(genreId)
+    .subscribe((response: { results: Movie[] }) => {
+      this.filteredMovies = response.results;
+
+      const genre = this.genreTitles.find((genre) => genre.id === genreId);
+      genre
+      ? this.selectedGenreName = genre.name
+      : this.selectedGenreName = null
+
+      this.setVisibleFilterByGenre =  true;
+      this.setVisiblePopularMovies = false;
+      this.setVisibleUpcomingMovies = false
+      this.setVisibleTopRatedMovies = false;
+      this.genresMenu = false;
+    });
   }
 
   @HostListener('window:resize', ['$event'])
