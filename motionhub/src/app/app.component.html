@@ -4,8 +4,17 @@
   </a>
 
   <div class="search-bar" *ngIf="isSearchActive()">
-    <input type="text" placeholder="Search..." class="search" />
-    <img src="../assets/search-icon.svg" alt="Seach icon" width="20" />
+    <input
+    type="text"
+    placeholder="Search..."
+    class="search"
+    [(ngModel)]="searchQuery"
+    />
+    <img
+    src="../assets/search-icon.svg"
+    alt="Seach icon"
+    width="20"
+    (click)="displaySearchResults()"/>
   </div>
 
 </nav>
