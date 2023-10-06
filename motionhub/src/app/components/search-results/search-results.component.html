@@ -5,13 +5,17 @@
 
     <section class="search-container">
         <h2>"{{ searchQuery }}"<hr></h2>
+        <p class="error-message" *ngIf="searchResults.length === 0">{{ message }}</p>
         <div *ngFor="let item of searchResults" class="item">
-            <ng-container *ngIf="item.poster_path">
+            <div *ngIf="item.poster_path">
                 <img [src]="'https://image.tmdb.org/t/p/w500/' + item.poster_path" [alt]="item.title" width="180" />
-            </ng-container>
-            <ng-container *ngIf="item.profile_path">
+            </div>
+            <div *ngIf="item.profile_path">
                 <img [src]="'https://image.tmdb.org/t/p/original/' + item.profile_path" [alt]="item.name" width="180" />
-            </ng-container>
+            </div>
+            <div *ngIf="!item.poster_path || !item.profile_path">
+                <img src="../../../assets/no-picture.png" alt="No picture available" width="180" />
+            </div>
         </div>
     </section>
 </section>

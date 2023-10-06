@@ -64,6 +64,13 @@ $text-font: 'Montserrat', sans-serif;
             color: $yellow;
         }
     }
+
+    .error-message {
+        height: 50vh;
+        font-size: 2rem;
+        margin-top: 2rem;
+        text-align: center;
+    }
 }
 
 @media (min-width: 1024px) {
