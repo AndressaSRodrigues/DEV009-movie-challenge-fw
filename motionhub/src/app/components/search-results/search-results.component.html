@@ -6,7 +6,12 @@
     <section class="search-container">
         <h2>"{{ searchQuery }}"<hr></h2>
         <div *ngFor="let item of searchResults" class="item">
-            <img [src]="'https://image.tmdb.org/t/p/w500/' + item.poster_path" [alt]="item.title" width="180" />
+            <ng-container *ngIf="item.poster_path">
+                <img [src]="'https://image.tmdb.org/t/p/w500/' + item.poster_path" [alt]="item.title" width="180" />
+            </ng-container>
+            <ng-container *ngIf="item.profile_path">
+                <img [src]="'https://image.tmdb.org/t/p/original/' + item.profile_path" [alt]="item.name" width="180" />
+            </ng-container>
         </div>
     </section>
 </section>
