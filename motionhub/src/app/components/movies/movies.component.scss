@@ -108,11 +108,17 @@ $text-font: 'Montserrat', sans-serif;
         @include column;
         margin: 0.5rem;
 
-        span {
-            font-family: $text-font;
-            font-size: 1.5rem;
-            color: $yellow;
+        .rating {
+            @include row;
+
+            span {
+                margin-left: 10px;
+                font-family: $text-font;
+                font-size: 1rem;
+                color: $yellow;
+            }
         }
+
     }
 }
 
