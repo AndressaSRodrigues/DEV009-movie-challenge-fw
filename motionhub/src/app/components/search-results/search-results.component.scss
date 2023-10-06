@@ -66,18 +66,18 @@ $text-font: 'Montserrat', sans-serif;
     }
 }
 
-@media (min-width: 1560px) {
+@media (min-width: 1024px) {
     .search-component {
 
         .title {
             h1 {
-                margin: 3rem 0 0 23rem;
+                margin: 5vh 0 0 18vw;
             }
         }
 
         .search-container {
-            margin-left: 20rem;
-            margin-right: 20rem;
+            margin-left: 15rem;
+            margin-right: 15rem;
         }
     }
 }

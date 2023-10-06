@@ -131,7 +131,7 @@ export class MoviesComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
-    this.isMobile = window.innerWidth <= 1560;
+    this.isMobile = window.innerWidth <= 1024;
   }
 
   @HostListener('window:click', ['$event'])

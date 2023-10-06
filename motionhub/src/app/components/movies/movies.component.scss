@@ -116,23 +116,24 @@ $text-font: 'Montserrat', sans-serif;
     }
 }
 
-@media (min-width: 1560px) {
+@media (min-width: 1024px) {
     .movies-component {
 
         .title-options {
             h1 {
-                margin: 3rem 0 0 23rem;
+                margin: 5vh 0 0 18vw;
             }
 
             .options-container {
                 flex-direction: row;
                 top: 13vh;
-                left: 28vw;
+                left: 26vw;
                 border-bottom: 0;
                 border-right: 0;
                 background: none;
                 
                 .btn, .active {
+                    font-size: 1.6rem;
                     margin-left: 5rem;
                 }
 
@@ -149,12 +150,12 @@ $text-font: 'Montserrat', sans-serif;
             .genres-menu {
                 flex-wrap: wrap;
                 left: 46.5vw;
-                top: 20vh;
+                top: 22vh;
                 width: 35vw;
-                height: 35vh;
+                height: 40vh;
                 padding: 1rem 1rem 0 1rem;
                 background-color: $dark-gray;
-                font-size: 2rem;
+                font-size: 1.5rem;
     
                 .genres-title {
                     width: 35vw;
@@ -168,8 +169,8 @@ $text-font: 'Montserrat', sans-serif;
         }
 
         .movies-container {
-            margin-left: 20rem;
-            margin-right: 20rem;
+            margin-left: 15rem;
+            margin-right: 15rem;
         }
     }
 }

@@ -7,7 +7,7 @@ import { SearchService } from 'src/app/services/search.service';
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss']
 })
-export class SearchResultsComponent {
+export class SearchResultsComponent implements OnInit {
   searchQuery: string = '';
   searchResults: any[] = [];
 
