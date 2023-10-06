@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MoviesService } from 'src/app/service/movies.service';
+import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'app-search-results',
@@ -11,14 +11,14 @@ export class SearchResultsComponent {
   searchQuery: string = '';
   searchResults: any[] = [];
 
-  constructor(private route: ActivatedRoute, private moviesService: MoviesService) { }
+  constructor(private route: ActivatedRoute, private searchService: SearchService) { }
 
   ngOnInit(): void {
     this.route.params
       .subscribe(params => {
         this.searchQuery = params['query']
 
-        this.moviesService.getSearch(this.searchQuery)
+        this.searchService.getSearch(this.searchQuery)
           .subscribe(
             (response: { results: any[] }) => {
               this.searchResults = response.results;

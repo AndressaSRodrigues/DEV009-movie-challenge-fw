@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { MoviesService } from 'src/app/service/movies.service';
+import { MoviesService } from 'src/app/services/movies.service';
 
 interface Movie {
   id: number;

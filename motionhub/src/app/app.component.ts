@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { MoviesService } from './service/movies.service';
+import { SearchService } from './services/search.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,7 @@ export class AppComponent {
   searchQuery: string = '';
   errorMessage: string = '';
 
-  constructor(private router: Router, private moviesService: MoviesService) {}
+  constructor(private router: Router, private searchService: SearchService) {}
 
   isSearchActive(): boolean {
     return this.router.url !== '/home'; 
