@@ -25,13 +25,18 @@ interface Genres {
 })
 
 export class MoviesComponent implements OnInit {
-  showOptions = false;
-  isMobile = false;
-  setVisiblePopularMovies = true;
-  setVisibleUpcomingMovies = false;
-  setVisibleTopRatedMovies = false;
-  setVisibleFilterByGenre =  false;
-  genresMenu = false;
+  showOptions:boolean = false;
+  isMobile: boolean = false;
+  genresMenu: boolean = false;
+  visibleMovies: string = 'popular';
+  title: string = '';
+
+  currentMovies: Movie[] = [];
+  selectedGenre: number | null = null;
+  selectedGenreName: string = '';
+  genreTitles: Genres[] = [];
+  filteredMovies: Movie[] = [];
+
 
   toggleOptions() {
     this.showOptions = !this.showOptions;
@@ -41,64 +46,31 @@ export class MoviesComponent implements OnInit {
     this.genresMenu = !this.genresMenu;
   }
 
-  popularMovies: Movie[] = [];
-  upcomingMovies: Movie[] = [];
-  topRatedMovies: Movie[] = [];
-  genreTitles: Genres[] = [];
-  selectedGenre: number | null = null;
-  selectedGenreName: string | null = null;
-  filteredMovies: Movie[] = [];
-
   constructor(private moviesService: MoviesService) { }
 
   ngOnInit(): void {
-    this.displayPopuplarMovies();
+    this.displayMovies('popular');
     this.displayGenres();
   }
 
-  displayPopuplarMovies() {
-    this.moviesService.getPopularMovies()
+  displayMovies(kind: string) {
+    this.moviesService.getMovies(kind)
       .subscribe(
         (response: { results: Movie[] }): void => {
-          this.popularMovies = response.results;
-          this.setVisiblePopularMovies = true;
-          this.setVisibleTopRatedMovies = false;
-          this.setVisibleUpcomingMovies = false;
-          this.setVisibleFilterByGenre =  false;
+          this.currentMovies = response.results;
+          this.visibleMovies = kind;
           this.showOptions = false;
           this.genresMenu = false;
+          this.selectedGenre = null;
+          if (this.visibleMovies === 'popular') {
+            this.title = 'New & Popular';
+          } else if (this.visibleMovies === 'top_rated') {
+            this.title = 'Top Rated'
+          } else if (this.visibleMovies === 'upcoming') {
+            this.title = 'Upcoming'
+          }
         }
       );
-  }
-
-  displayUpcomingMovies() {
-    this.moviesService.getUpcomingMovies()
-      .subscribe(
-        (response: { results: Movie[] }): void => {
-          this.upcomingMovies = response.results;
-          this.setVisibleUpcomingMovies = true;
-          this.setVisiblePopularMovies = false;
-          this.setVisibleTopRatedMovies = false;
-          this.setVisibleFilterByGenre = false;
-          this.showOptions = false;
-          this.genresMenu = false;
-        }
-      )
-  }
-
-  displayTopRatedMovies() {
-    this.moviesService.getTopRatedMovies()
-      .subscribe(
-        (response: { results: Movie[] }): void => {
-          this.topRatedMovies = response.results;
-          this.setVisibleTopRatedMovies = true;
-          this.setVisiblePopularMovies = false;
-          this.setVisibleUpcomingMovies = false;
-          this.setVisibleFilterByGenre = false;
-          this.showOptions = false;
-          this.genresMenu = false;
-        }
-      )
   }
 
   displayGenres() {
@@ -114,19 +86,16 @@ export class MoviesComponent implements OnInit {
     this.selectedGenre = genreId;
     this.moviesService.getMoviesByGenre(genreId)
     .subscribe((response: { results: Movie[] }) => {
-      this.filteredMovies = response.results;
+      this.currentMovies = response.results;
 
       const genre = this.genreTitles.find((genre) => genre.id === genreId);
       genre
       ? this.selectedGenreName = genre.name
-      : this.selectedGenreName = null
-
-      this.setVisibleFilterByGenre =  true;
-      this.setVisiblePopularMovies = false;
-      this.setVisibleUpcomingMovies = false
-      this.setVisibleTopRatedMovies = false;
-      this.genresMenu = false;
+      : this.selectedGenreName = '';
     });
+    this.showOptions = false;
+    this.genresMenu = false;
+    this.visibleMovies = 'genre';
   }
 
   @HostListener('window:resize', ['$event'])
@@ -166,5 +135,4 @@ export class MoviesComponent implements OnInit {
     }
     return this.isDescendantOfOptionsContainer(element.parentElement as HTMLElement);
   }
-
 }

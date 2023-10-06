@@ -13,24 +13,8 @@ export class MoviesService {
 
   constructor(private http: HttpClient) { }
 
-  getPopularMovies(): Observable<any> {
-    const url = `${this.apiUrl}/movie/popular?api_key=${this.apiKey}`;
-    return this.http.get(url)
-    .pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  getUpcomingMovies(): Observable<any> {
-    const url = `${this.apiUrl}/movie/upcoming?api_key=${this.apiKey}`;
-    return this.http.get(url)
-    .pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  getTopRatedMovies(): Observable<any> {
-    const url = `${this.apiUrl}/movie/top_rated?api_key=${this.apiKey}`;
+  getMovies(kind: string): Observable<any> {
+    const url = `${this.apiUrl}/movie/${kind}?api_key=${this.apiKey}`;
     return this.http.get(url)
     .pipe(
       catchError(this.handleError)
