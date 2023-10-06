@@ -10,6 +10,7 @@ import { SearchService } from 'src/app/services/search.service';
 export class SearchResultsComponent implements OnInit {
   searchQuery: string = '';
   searchResults: any[] = [];
+  message: string = 'Sorry... we couldn\'t find what you\'re looking for 😥';
 
   constructor(private route: ActivatedRoute, private searchService: SearchService) { }
 
