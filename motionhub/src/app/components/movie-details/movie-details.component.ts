@@ -5,13 +5,21 @@ import { MoviesService } from 'src/app/services/movies.service';
 interface Movie {
   id: number;
   title: string;
-  genre_ids: number[];
+  tagline: string;
+  genres: { id: number; name: string }[];
   poster_path: string;
   overview: string;
-  popularity: number;
   vote_average: number;
   release_date: string;
+  credits: {
+    cast: Actor[];
+  };
   optional?: any; // an example of optional properties
+}
+
+interface Actor {
+  name: string;
+  character: string;
 }
 
 @Component({
@@ -22,7 +30,7 @@ interface Movie {
 
 export class MovieDetailsComponent implements OnInit {
   movieId: number = 0;
-  details: Movie[] = [];
+  movieDetails: Movie | null = null;
 
   constructor(private route: ActivatedRoute, private moviesService: MoviesService) { }
 
@@ -34,9 +42,9 @@ export class MovieDetailsComponent implements OnInit {
 
         this.moviesService.getMovieDetails(this.movieId)
           .subscribe(
-            (response: Movie[] ) => {
-              this.details = response;
-              console.log(this.details)
+            (response: Movie ) => {
+              this.movieDetails = response;
+              console.log(this.movieDetails)
             })
       })
   }

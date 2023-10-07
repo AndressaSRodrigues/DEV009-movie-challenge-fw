@@ -1,1 +1,25 @@
-<p>movie-details works!</p>
+<section class="details-main">
+    <section *ngIf="movieDetails">
+        <div class="movie-poster">
+            <img [src]="'https://image.tmdb.org/t/p/w500/' + movieDetails.poster_path" [alt]="movieDetails.title"
+                width="400" />
+        </div>
+        <div class="movie-info">
+            <h1>{{ movieDetails.title }}</h1>
+            <span>{{ movieDetails.tagline }}</span>
+            <div class="rating">
+                <img src="../../../assets/star.png" alt="Rating star" width="20" />
+                <span>{{ movieDetails.vote_average }}</span>
+            </div>
+            <div *ngFor="let genre of movieDetails.genres">
+                <span>{{ genre.name }}</span>
+            </div>
+            <span>{{ movieDetails.release_date | date: 'yyyy' }}</span>
+            <p>{{ movieDetails.overview }}</p>
+            <h2>Main Actors</h2>
+            <li *ngFor="let actor of movieDetails.credits.cast.slice(0, 4)">
+                {{ actor.name }} as {{ actor.character }}
+            </li>
+        </div>
+    </section>
+</section>
