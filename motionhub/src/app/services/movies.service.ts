@@ -14,8 +14,14 @@ export class MoviesService {
   constructor(private http: HttpClient) { }
 
   getMovies(kind: string): Observable<any> {
-    const url = `${this.apiUrl}/movie/${kind}?api_key=${this.apiKey}`;
-    return this.http.get(url)
+      return this.http.get(`${this.apiUrl}/movie/${kind}?api_key=${this.apiKey}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getMovieDetails(movieId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/movie/${movieId}?api_key=${this.apiKey}`)
     .pipe(
       catchError(this.handleError)
     );

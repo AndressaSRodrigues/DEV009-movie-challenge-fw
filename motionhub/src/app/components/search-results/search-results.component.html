@@ -7,9 +7,11 @@
         <h2>"{{ searchQuery }}"<hr></h2>
         <p class="error-message" *ngIf="searchResults.length === 0">{{ message }}</p>
         <div *ngFor="let item of searchResults" class="item">
-            <div *ngIf="item.poster_path">
-                <img [src]="'https://image.tmdb.org/t/p/w500/' + item.poster_path" [alt]="item.title" width="180" />
-            </div>
+            <a [routerLink]="['/movies', item.id]">
+                <div *ngIf="item.poster_path">
+                    <img [src]="'https://image.tmdb.org/t/p/w500/' + item.poster_path" [alt]="item.title" width="180" />
+                </div>
+            </a>
             <div *ngIf="item.profile_path">
                 <img [src]="'https://image.tmdb.org/t/p/original/' + item.profile_path" [alt]="item.name" width="180" />
             </div>

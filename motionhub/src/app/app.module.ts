@@ -9,6 +9,7 @@ import { TvshowsComponent } from './components/tvshows/tvshows.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SearchResultsComponent } from './components/search-results/search-resul
     HomeComponent,
     MoviesComponent,
     TvshowsComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    MovieDetailsComponent
   ],
   imports: [
     BrowserModule,

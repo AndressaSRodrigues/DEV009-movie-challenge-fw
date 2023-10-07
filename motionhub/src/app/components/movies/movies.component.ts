@@ -54,10 +54,11 @@ export class MoviesComponent implements OnInit {
   }
 
   displayMovies(kind: string) {
-    this.moviesService.getMovies(kind)
+      this.moviesService.getMovies(kind)
       .subscribe(
         (response: { results: Movie[] }): void => {
           this.currentMovies = response.results;
+          console.log(response.results)
           this.visibleMovies = kind;
           this.showOptions = false;
           this.genresMenu = false;
