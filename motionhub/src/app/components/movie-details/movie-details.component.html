@@ -1,25 +1,57 @@
-<section class="details-main">
-    <section *ngIf="movieDetails">
-        <div class="movie-poster">
+<section class="h-full">
+
+    <section *ngIf="movieDetails"
+        class="flex flex-col items-center justify-center p-10 lg:flex-row lg:p-0 lg:mr-40 lg:ml-40 lg:justify-start">
+
+        <div class="mt-10 p-2 lg:flex-shrink-0 lg:w-2/5">
             <img [src]="'https://image.tmdb.org/t/p/w500/' + movieDetails.poster_path" [alt]="movieDetails.title"
-                width="400" />
+                width="500" />
         </div>
-        <div class="movie-info">
-            <h1>{{ movieDetails.title }}</h1>
-            <span>{{ movieDetails.tagline }}</span>
-            <div class="rating">
-                <img src="../../../assets/star.png" alt="Rating star" width="20" />
-                <span>{{ movieDetails.vote_average }}</span>
+
+        <div class="font-koulen text-lg ml-5 mr-5 lg:mt-12 lg:ml-10 lg:mr-20">
+            <h1 class="font-koulen text-5xl text-yellow mt-5 mb-5">{{ movieDetails.title }}</h1>
+            <div class="flex flex-row justify-between mb-5">
+
+                <span class="lg:text-2xl">{{ movieDetails.tagline }}</span>
+                <div class="flex flex-row">
+                    <img src="../../../assets/star.png" alt="Rating star" class="mr-1 w-6 h-6 lg:w-8 lg:h-8" />
+                    <span class="lg:text-2xl">{{ movieDetails.vote_average | number: '1.1-1' }}</span>
+                </div>
             </div>
-            <div *ngFor="let genre of movieDetails.genres">
-                <span>{{ genre.name }}</span>
+
+            <div class="flex flex-wrap flex-row justify-around mb-5 lg:justify-start">
+                <div *ngFor="let genre of movieDetails.genres.slice(0, 3)" class="flex items-center mr-2 mb-2">
+                    <span class="border border-solid border-yellow p-2 text-sm text-center w-28 lg:w-32 lg:text-lg">{{
+                        genre.name }}</span>
+                </div>
             </div>
-            <span>{{ movieDetails.release_date | date: 'yyyy' }}</span>
-            <p>{{ movieDetails.overview }}</p>
-            <h2>Main Actors</h2>
-            <li *ngFor="let actor of movieDetails.credits.cast.slice(0, 4)">
-                {{ actor.name }} as {{ actor.character }}
-            </li>
+
+            <div class="flex flex-wrap flex-row justify-around mb-5 lg:justify-start">
+                <span class="lg:mr-5 lg:text-lg">{{ movieDetails.release_date | date: 'yyyy' }}</span>
+                <span class="lg:mr-5 lg:text-lg">{{ movieDetails.runtime}} minutes</span>
+                <span class="lg:mr-5 lg:text-lg">{{ movieDetails.original_language }}</span>
+            </div>
+
+            <p class="font-montserrat mb-5 lg:mb-10">{{ movieDetails.overview }}</p>
+
+            <h2 class="text-yellow text-2xl mb-5 lg:text-3xl">Main Actors</h2>
+
+            <div class="flex flex-row flex-wrap justify-center">
+                <div *ngFor="let actor of movieDetails.credits.cast.slice(0, 6)" class="justify-center m-2 lg:w-1/4">
+                    <div *ngIf="actor.profile_path">
+                        <img [src]="'https://image.tmdb.org/t/p/original/' + actor.profile_path" [alt]="actor.name"
+                            class="border border-solid border-yellow w-24" />
+                    </div>
+
+                    <div *ngIf="!actor.profile_path">
+                        <img src="../../../assets/no-picture.png" alt="No picture available" width="180"
+                            class="border border-solid border-yellow w-24" />
+                    </div>
+                    <span class="text-sm">{{ actor.name }}</span>
+                </div>
+            </div>
         </div>
+
     </section>
+
 </section>

@@ -6,22 +6,27 @@
             *ngIf="isMobile" />
 
         <div class="options-container" *ngIf="showOptions || !isMobile">
-            <button [ngClass]="visibleMovies === 'popular' && !genresMenu ? 'active' : 'btn'" (click)="displayMovies('popular')">New & popular</button>
+            <button [ngClass]="visibleMovies === 'popular' && !genresMenu ? 'active' : 'btn'" (click)="displayMovies('popular', 2)">New & popular</button>
             <button [ngClass]="visibleMovies === 'genre' ? 'active' : 'btn'" (click)="toggleGenresMenu()">Browse by genre</button>
-            <button [ngClass]="visibleMovies === 'top_rated' && !genresMenu ? 'active' : 'btn'" (click)="displayMovies('top_rated')">Top Rated</button>
-            <button [ngClass]="visibleMovies === 'upcoming' && !genresMenu ? 'active' : 'btn'" (click)="displayMovies('upcoming')">Upcoming</button>
+            <button [ngClass]="visibleMovies === 'top_rated' && !genresMenu ? 'active' : 'btn'" (click)="displayMovies('top_rated', 1)">Top Rated</button>
+            <button [ngClass]="visibleMovies === 'upcoming' && !genresMenu ? 'active' : 'btn'" (click)="displayMovies('upcoming', 1)">Upcoming</button>
         </div>
 
         <div class="genres-menu" *ngIf="genresMenu">
             <div *ngFor="let genre of genreTitles">
                 <div class="genres-titles">
-                    <span (click)="filterByGenre(genre.id)">{{ genre.name }}</span>
+                    <span (click)="filterByGenre(genre.id, 1)">{{ genre.name }}</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="movies-container">
+    <section class="movies-container"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()"
+    >
         <h2 *ngIf="visibleMovies !== 'genre'">{{ title }}<hr></h2>
         <h2 *ngIf="visibleMovies === 'genre'">{{ selectedGenreName }}<hr></h2>
         <div *ngFor="let movie of currentMovies" class="movies">
