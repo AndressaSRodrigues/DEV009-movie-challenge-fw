@@ -1,22 +1,25 @@
-<section class="search-component">
-    <section class="title">
-        <h1>Results</h1>
+<section class="h-full">
+    <section class="flex flex-row flex-wrap font-koulen h-50 pt-20 p-5 lg:mr-20 lg:ml-20">
+        <h1 class="text-5xl text-yellow mb-5 w-full">Results</h1>
+        <h2 class="text-2xl w-full">"{{ searchQuery }}"</h2>
+        <hr class="border border-solid border-yellow w-full">
     </section>
 
-    <section class="search-container">
-        <h2>"{{ searchQuery }}"<hr></h2>
-        <p class="error-message" *ngIf="searchResults.length === 0">{{ message }}</p>
-        <div *ngFor="let item of searchResults" class="item">
+    <section class="flex flex-row flex-wrap justify-center m-5 lg:m-20">
+
+        <p class="font-koulen text-3xl" *ngIf="searchResults.length === 0">{{ message }}</p>
+
+        <div *ngFor="let item of searchResults">
             <a [routerLink]="['/movies', item.id]">
-                <div *ngIf="item.poster_path">
-                    <img [src]="'https://image.tmdb.org/t/p/w500/' + item.poster_path" [alt]="item.title" width="180" />
+                <div *ngIf="item.poster_path" class="m-1 lg:m-2">
+                    <img [src]="'https://image.tmdb.org/t/p/w500/' + item.poster_path" [alt]="item.title" width="180" class="w-36 lg:w-44" />
                 </div>
             </a>
-            <div *ngIf="item.profile_path">
-                <img [src]="'https://image.tmdb.org/t/p/original/' + item.profile_path" [alt]="item.name" width="180" />
+            <div *ngIf="item.profile_path" class="m-1 lg:m-2">
+                <img [src]="'https://image.tmdb.org/t/p/original/' + item.profile_path" [alt]="item.name" width="180" class="w-36 lg:w-44" />
             </div>
-            <div *ngIf="!item.poster_path || !item.profile_path">
-                <img src="../../../assets/no-picture.png" alt="No picture available" width="180" />
+            <div *ngIf="!item.poster_path || !item.profile_path" class="m-1 lg:m-2">
+                <img src="../../../assets/no-picture.png" alt="No picture available" width="180" class="w-36 lg:w-44" />
             </div>
         </div>
     </section>
