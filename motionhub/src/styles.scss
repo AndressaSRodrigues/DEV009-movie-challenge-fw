@@ -2,11 +2,13 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-
 $yellow: #FFD369;
 $white: #EEEEEE;
 $gray: #333333;
 $dark-gray: #151515;
+
+$primary-font: 'Koulen', cursive;
+$text-font: 'Montserrat', sans-serif;
 
 body {
     background-color: $gray;

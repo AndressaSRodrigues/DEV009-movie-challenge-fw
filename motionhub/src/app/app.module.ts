@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MovieDetailsComponent } from './components/movie-details/movie-details.
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    InfiniteScrollModule,
   ],
   providers: [], // using @Injectable instead
   bootstrap: [AppComponent]

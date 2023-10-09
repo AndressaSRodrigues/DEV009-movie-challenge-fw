@@ -3,18 +3,28 @@
     <img width="40" alt="MotionHub Logo" src="../assets/mhicon.png" />
   </a>
 
-  <div class="search-bar" *ngIf="isSearchActive()">
-    <input
-    type="text"
-    placeholder="Search..."
-    class="search"
-    [(ngModel)]="searchQuery"
-    />
-    <img
-    src="../assets/search-icon.svg"
-    alt="Seach icon"
-    width="20"
-    (click)="displaySearchResults()"/>
+  <div *ngIf="isSearchActive()" class="tools">
+
+    <div class="navigation">
+      <a href="/home">Home</a>
+      <a href="/movies">Movies</a>
+      <a href="/tvshows">TV Shows</a>
+    </div>
+
+    <div class="search-bar">
+      <input
+      type="text"
+      placeholder="Search..."
+      class="search"
+      [(ngModel)]="searchQuery"
+      />
+      <img
+      src="../assets/search-icon.svg"
+      alt="Seach icon"
+      width="20"
+      (click)="displaySearchResults()"/>
+    </div>
+  
   </div>
 
 </nav>

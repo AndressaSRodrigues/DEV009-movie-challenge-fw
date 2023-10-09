@@ -11,6 +11,8 @@ interface Movie {
   overview: string;
   vote_average: number;
   release_date: string;
+  runtime: number;
+  original_language: string;
   credits: {
     cast: Actor[];
   };
@@ -20,6 +22,7 @@ interface Movie {
 interface Actor {
   name: string;
   character: string;
+  profile_path: string;
 }
 
 @Component({

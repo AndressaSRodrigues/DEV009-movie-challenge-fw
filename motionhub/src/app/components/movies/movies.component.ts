@@ -37,6 +37,9 @@ export class MoviesComponent implements OnInit {
   genreTitles: Genres[] = [];
   filteredMovies: Movie[] = [];
 
+  loading: boolean = false;
+  page: number = 1;
+
 
   toggleOptions() {
     this.showOptions = !this.showOptions;
@@ -49,20 +52,23 @@ export class MoviesComponent implements OnInit {
   constructor(private moviesService: MoviesService) { }
 
   ngOnInit(): void {
-    this.displayMovies('popular');
+    this.displayMovies('popular', 1);
     this.displayGenres();
   }
 
-  displayMovies(kind: string) {
-      this.moviesService.getMovies(kind)
+  displayMovies(kind: string, page: number) {
+      this.moviesService.getMovies(kind, page)
       .subscribe(
         (response: { results: Movie[] }): void => {
           this.currentMovies = response.results;
           console.log(response.results)
+
           this.visibleMovies = kind;
+
           this.showOptions = false;
           this.genresMenu = false;
           this.selectedGenre = null;
+
           if (this.visibleMovies === 'popular') {
             this.title = 'New & Popular';
           } else if (this.visibleMovies === 'top_rated') {
@@ -83,11 +89,20 @@ export class MoviesComponent implements OnInit {
       );
   }
 
-  filterByGenre(genreId: number): void {
+  filterByGenre(genreId: number, page: number): void {
+
+    if (this.loading) {
+      return;
+    }
+
     this.selectedGenre = genreId;
-    this.moviesService.getMoviesByGenre(genreId)
+    this.loading = true;
+
+    this.moviesService.getMoviesByGenre(genreId, page)
     .subscribe((response: { results: Movie[] }) => {
       this.currentMovies = response.results;
+      this.page = 1;
+      this.loading = false;
 
       const genre = this.genreTitles.find((genre) => genre.id === genreId);
       genre
@@ -97,6 +112,38 @@ export class MoviesComponent implements OnInit {
     this.showOptions = false;
     this.genresMenu = false;
     this.visibleMovies = 'genre';
+  }
+
+  loadMovies() {
+    if (this.loading) {
+      return;
+    }
+  
+    this.loading = true;
+  
+    if (this.visibleMovies === 'genre' && this.selectedGenre !== null) {
+      this.moviesService.getMoviesByGenre(this.selectedGenre, this.page + 1)
+        .subscribe(
+          (response: { results: Movie[] }) => {
+            this.currentMovies = this.currentMovies.concat(response.results);
+            this.page++;
+            this.loading = false;
+          }
+        );
+    } else {
+      this.moviesService.getMovies(this.visibleMovies, this.page + 1)
+        .subscribe(
+          (response: { results: Movie[] }) => {
+            this.currentMovies = this.currentMovies.concat(response.results);
+            this.page++;
+            this.loading = false;
+          }
+        );
+    }
+  }
+  
+  onScroll() {
+    this.loadMovies();
   }
 
   @HostListener('window:resize', ['$event'])
