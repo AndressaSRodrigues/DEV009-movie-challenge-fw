@@ -11,11 +11,23 @@ import { SearchService } from './services/search.service';
 export class AppComponent {
   searchQuery: string = '';
   errorMessage: string = '';
-
-  constructor(private router: Router, private searchService: SearchService) {}
+  isMenuOpen: boolean = false;
+  constructor(private router: Router) {}
 
   isSearchActive(): boolean {
     return this.router.url !== '/home'; 
+  }
+
+  isMobile():boolean {
+    if(window.innerWidth < 1024) {
+      return this.isMenuOpen;
+    }
+    return !this.isMenuOpen;
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+    console.log('Open')
   }
 
   displaySearchResults() {
@@ -23,5 +35,6 @@ export class AppComponent {
       this.router.navigate(['/search-results', this.searchQuery]);
     }
   }
+
 }
 
