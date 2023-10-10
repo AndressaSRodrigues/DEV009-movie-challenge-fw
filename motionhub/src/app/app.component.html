@@ -3,23 +3,23 @@
     <img width="40" alt="MotionHub Logo" src="../assets/mhicon.png" />
   </a>
 
-  <div *ngIf="isSearchActive()" class="flex flex-row justify-around items-center w-full">
+  <div *ngIf="isSearchActive()" class="flex flex-row justify-start items-center w-full">
 
-    <div class="flex flex-row justify-between bg-gray h-8 border border-solid border-yellow ml-4 p-1 lg:ml-10 lg:p-2 lg:w-96 lg:h-12">
-      <input type="text" placeholder="Search..." class="search" [(ngModel)]="searchQuery" class="bg-gray lg:w-92" />
+    <div class="flex flex-row justify-between bg-gray w-64 h-8 ml-10 border border-solid border-yellow p-1 lg:p-2 lg:h-12 lg:w-2/4 lg:ml-24">
+      <input type="text" placeholder="Search..." class="search" [(ngModel)]="searchQuery" class="bg-gray" />
       <img src="../assets/search-icon.svg" alt="Seach icon" width="20" (click)="displaySearchResults()" />
     </div>
 
-    <div class="px-2 cursor-pointer lg:hidden" (click)="toggleMenu()">
+    <div class="cursor-pointer ml-8 mr-0 lg:hidden" (click)="toggleMenu()">
       <img *ngIf="!isMenuOpen" src="../assets/menu.svg" alt="Open menu" width="35" />
       <img *ngIf="isMenuOpen" src="../assets/close.svg" alt="Close menu" width="30">
     </div>
 
-    <div class="hidden flex flex-col bg-dark font-koulen text-2xl lg:flex lg:flex-row">
-      <a href="/home" class="hover:text-yellow duration-500 mx-6">Home</a>
-      <a href="/movies" class="hover:text-yellow duration-500 mx-6">Movies</a>
-      <a href="/tvshows" class="hover:text-yellow duration-500 mx-6">TV Shows</a>
-      <a href="/login" class="font-koulen text-yellow hover:text-white duration-500 mx-6">Log In</a>
+    <div class="hidden flex flex-col absolute p-4 top-20 right-0 h-full w-full bg-dark font-koulen text-5xl lg:text-2xl lg:flex lg:flex-row lg:top-6 lg:h-8 lg:w-fit lg:p-0" [class.hidden]="!isMenuOpen">
+      <a href="/home" class="hover:text-yellow duration-500 mx-8 my-4 lg:my-0">Home</a>
+      <a href="/movies" class="hover:text-yellow duration-500 mx-8 my-4 lg:my-0">Movies</a>
+      <a href="/tvshows" class="hover:text-yellow duration-500 mx-8 my-4 lg:my-0">TV Shows</a>
+      <a href="/login" class="font-koulen text-yellow hover:text-white duration-500 mx-8 my-8 lg:my-0">Log In</a>
     </div>
   </div>
 </nav>

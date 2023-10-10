@@ -12,17 +12,11 @@ export class AppComponent {
   searchQuery: string = '';
   errorMessage: string = '';
   isMenuOpen: boolean = false;
+
   constructor(private router: Router) {}
 
   isSearchActive(): boolean {
     return this.router.url !== '/home'; 
-  }
-
-  isMobile():boolean {
-    if(window.innerWidth < 1024) {
-      return this.isMenuOpen;
-    }
-    return !this.isMenuOpen;
   }
 
   toggleMenu() {
