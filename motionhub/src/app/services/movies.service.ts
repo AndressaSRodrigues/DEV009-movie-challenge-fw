@@ -13,34 +13,30 @@ export class MoviesService {
 
   constructor(private http: HttpClient) { }
 
-  getMovies(kind: string, page: number): Observable<any> {
-      return this.http.get(`${this.apiUrl}/movie/${kind}?api_key=${this.apiKey}&page=${page}`)
+  getMovies(kind: string | undefined, page: number, genreId?: number | undefined): Observable<any> {
+    let url = `${this.apiUrl}/movie/${kind}?api_key=${this.apiKey}&page=${page}`;
+    if (genreId) {
+      url = `${this.apiUrl}/discover/movie?api_key=${this.apiKey}&with_genres=${genreId}&page=${page}`;
+    }
+    return this.http.get(url)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getMovieDetails(movieId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/movie/${movieId}?api_key=${this.apiKey}&append_to_response=credits`)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  getMovieDetails(movieId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/movie/${movieId}?api_key=${this.apiKey}&append_to_response=credits`)
-    .pipe(
-      catchError(this.handleError)
-    );
-  }
-
   getGenres(): Observable<any> {
     const url = `${this.apiUrl}/genre/movie/list?api_key=${this.apiKey}`;
     return this.http.get(url)
-    .pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  getMoviesByGenre(genreId: number, page: number): Observable<any> {
-    const url = `${this.apiUrl}/discover/movie?api_key=${this.apiKey}&with_genres=${genreId}&page=${page}`;
-    return this.http.get(url)
-    .pipe(
-      catchError(this.handleError)
-    );
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   private handleError(error: HttpErrorResponse) {

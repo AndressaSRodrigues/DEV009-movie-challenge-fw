@@ -21,7 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MoviesComponent,
     TvshowsComponent,
     SearchResultsComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
   ],
   imports: [
     BrowserModule,

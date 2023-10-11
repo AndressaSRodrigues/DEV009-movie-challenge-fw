@@ -1,21 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { MoviesService } from 'src/app/services/movies.service';
-
-interface Movie {
-  id: number;
-  title: string;
-  genre_ids: number[];
-  poster_path: string;
-  overview: string;
-  popularity: number;
-  vote_average: number;
-  release_date: string;
-}
-
-interface Genres {
-  id: number,
-  name: string,
-}
+import { Movie } from 'src/app/components/interfaces/movie.interface';
+import { Genres } from 'src/app/components/interfaces/genres.interface';
 
 @Component({
   selector: 'app-movies',
@@ -23,19 +9,22 @@ interface Genres {
 })
 
 export class MoviesComponent implements OnInit {
-  showOptions:boolean = false;
+  showOptions: boolean = false;
   isMobile: boolean = false;
   genresMenu: boolean = false;
-  visibleMovies: string = 'popular';
+  loading: boolean = false;
+
   title: string = '';
 
   currentMovies: Movie[] = [];
-  selectedGenre: number | null = null;
+  visibleMovies: string = 'popular';
+
+  selectedGenre: number | undefined = undefined;
+  
   selectedGenreName: string = '';
   genreTitles: Genres[] = [];
-  filteredMovies: Movie[] = [];
 
-  loading: boolean = false;
+
   page: number = 1;
 
 
@@ -45,36 +34,27 @@ export class MoviesComponent implements OnInit {
 
   toggleGenresMenu() {
     this.genresMenu = !this.genresMenu;
-    console.log('Click click', this.genresMenu)
   }
-
+  
   constructor(private moviesService: MoviesService) { }
 
   ngOnInit(): void {
     this.displayMovies('popular', 1);
     this.displayGenres();
-    console.log(this.showOptions)
   }
 
-  displayMovies(kind: string, page: number) {
-      this.moviesService.getMovies(kind, page)
+  displayMovies(kind: string | undefined, page: number, genreId?: number | undefined): void {
+    this.moviesService.getMovies(kind, page, genreId)
       .subscribe(
         (response: { results: Movie[] }): void => {
           this.currentMovies = response.results;
-          console.log(response.results)
-
-          this.visibleMovies = kind;
-
-          this.showOptions = false;
-          this.genresMenu = false;
-          this.selectedGenre = null;
-
-          if (this.visibleMovies === 'popular') {
-            this.title = 'New & Popular';
-          } else if (this.visibleMovies === 'top_rated') {
-            this.title = 'Top Rated'
-          } else if (this.visibleMovies === 'upcoming') {
-            this.title = 'Upcoming'
+          this.page = 1;
+          this.loading = false;
+  
+          if (this.selectedGenre !== null) {
+            const genre = this.genreTitles.find((genre) => genre.id === this.selectedGenre);
+            this.selectedGenreName = genre ? genre.name : '';
+            console.log(this.selectedGenreName)
           }
         }
       );
@@ -85,60 +65,27 @@ export class MoviesComponent implements OnInit {
       .subscribe(
         (response: { genres: Genres[] }): void => {
           this.genreTitles = response.genres;
+          this.loading = false;
         }
       );
-  }
-
-  filterByGenre(genreId: number, page: number): void {
-
-    this.selectedGenre = genreId;
-    this.loading = true;
-
-    this.moviesService.getMoviesByGenre(genreId, page)
-    .subscribe((response: { results: Movie[] }) => {
-      this.currentMovies = response.results;
-      console.log(this.currentMovies)
-      this.page = 1;
-      this.loading = false;
-
-      const genre = this.genreTitles.find((genre) => genre.id === genreId);
-      genre
-      ? this.selectedGenreName = genre.name
-      : this.selectedGenreName = '';
-    });
-    this.showOptions = false;
-    this.genresMenu = false;
-    this.visibleMovies = 'genre';
   }
 
   loadMovies() {
     if (this.loading) {
       return;
     }
-  
+
     this.loading = true;
-  
-    if (this.visibleMovies === 'genre' && this.selectedGenre !== null) {
-      this.moviesService.getMoviesByGenre(this.selectedGenre, this.page + 1)
-        .subscribe(
-          (response: { results: Movie[] }) => {
-            this.currentMovies = this.currentMovies.concat(response.results);
-            this.page++;
-            this.loading = false;
-          }
-        );
-    } else {
-      this.moviesService.getMovies(this.visibleMovies, this.page + 1)
-        .subscribe(
-          (response: { results: Movie[] }) => {
-            this.currentMovies = this.currentMovies.concat(response.results);
-            this.page++;
-            this.loading = false;
-          }
-        );
-    }
+    this.moviesService.getMovies(this.visibleMovies, this.page + 1, this.selectedGenre)
+      .subscribe(
+        (response: { results: Movie[] }) => {
+          this.currentMovies = this.currentMovies.concat(response.results);
+          this.page++;
+          this.loading = false;
+        }
+      );
   }
-  
+
   onScroll() {
     this.loadMovies();
   }
@@ -147,38 +94,4 @@ export class MoviesComponent implements OnInit {
   onResize(event: any): void {
     this.isMobile = window.innerWidth <= 1024;
   }
-
-/*   @HostListener('window:click', ['$event'])
-  onClick(event: MouseEvent): void {
-    const clickedElement = event.target as HTMLElement;
-    const isClickInsideOptionsIcon = clickedElement.classList.contains('options-icon');
-    const isClickOutsideMenus = !this.isDescendantOfGenresMenu(clickedElement) &&
-      !this.isDescendantOfOptionsContainer(clickedElement);
-
-    if (!isClickInsideOptionsIcon && isClickOutsideMenus) {
-      this.genresMenu = false;
-      this.showOptions = false;
-    }
-  }
-
-  private isDescendantOfGenresMenu(element: HTMLElement): boolean {
-    if (!element) {
-      return false;
-    }
-    if (element.classList.contains('genres-menu')) {
-      return true;
-    }
-    return this.isDescendantOfGenresMenu(element.parentElement as HTMLElement);
-  }
-
-  private isDescendantOfOptionsContainer(element: HTMLElement): boolean {
-    if (!element) {
-      return false;
-    }
-    if (element.classList.contains('options-container')) {
-      return true;
-    }
-    return this.isDescendantOfOptionsContainer(element.parentElement as HTMLElement);
-  }
-   */
 }
