@@ -1,41 +1,50 @@
-<section class="movies-component">
-    <section class="title-options">
-        <h1>Movies</h1>
+<section class="h-full">
+    <section class="flex flex-row justify-start mx-5 lg:mx-20">
+        <h1 class="text-6xl text-yellow mx-4 my-4 lg:mx-14 lg:my-10">Movies</h1>
         <img src="../../../assets/arrow-down.svg" alt="More options" width="30" class="options-icon"
             (click)="toggleOptions()"
             *ngIf="isMobile" />
 
-        <div class="options-container" *ngIf="showOptions || !isMobile">
-            <button [ngClass]="visibleMovies === 'popular' && !genresMenu ? 'active' : 'btn'" (click)="displayMovies('popular', 2)">New & popular</button>
-            <button [ngClass]="visibleMovies === 'genre' ? 'active' : 'btn'" (click)="toggleGenresMenu()">Browse by genre</button>
-            <button [ngClass]="visibleMovies === 'top_rated' && !genresMenu ? 'active' : 'btn'" (click)="displayMovies('top_rated', 1)">Top Rated</button>
-            <button [ngClass]="visibleMovies === 'upcoming' && !genresMenu ? 'active' : 'btn'" (click)="displayMovies('upcoming', 1)">Upcoming</button>
+        <div class="flex flex-col items-start absolute top-40 bg-gray w-full text-2xl ml-4 lg:flex-row lg:justify-evenly lg:w-3/4 lg:top-28 lg:right-0 z-10" *ngIf="showOptions || !isMobile">
+            <button [ngClass]="visibleMovies === 'popular' && !genresMenu ? 'text-yellow overline' : 'text-white'" (click)="displayMovies('popular', 2)">New & popular</button>
+            <button [ngClass]="visibleMovies === 'upcoming' && !genresMenu ? 'text-yellow overline' : 'text-white'" (click)="displayMovies('upcoming', 1)">Upcoming</button>
+            <button [ngClass]="visibleMovies === 'top_rated' && !genresMenu ? 'text-yellow overline' : 'text-white'" (click)="displayMovies('top_rated', 1)">Top Rated</button>
+            <button [ngClass]="visibleMovies === 'genre' ? 'text-yellow overline' : 'text-white'" (click)="toggleGenresMenu()">Browse by genre</button>
         </div>
 
-        <div class="genres-menu" *ngIf="genresMenu">
+        <div class="hidden flex flex-col flex-wrap absolute h-52 w-full top-72 left-0 justify-center bg-dark p-2 lg:flex-wrap lg:w-96 lg:h-36 lg:top-40 lg:left-2/3 border border-solid border-yellow z-10" [class.hidden]="!genresMenu">
+            <div class="h-full p-1 cursor-pointer">
+                <img src="../../../assets/close.svg" alt="Close" width="15" (click)="toggleGenresMenu()">
+            </div>
+
             <div *ngFor="let genre of genreTitles">
-                <div class="genres-titles">
-                    <span (click)="filterByGenre(genre.id, 1)">{{ genre.name }}</span>
+                <div>
+                    <span class="text-1xl cursor-pointer hover:text-yellow" (click)="filterByGenre(genre.id, 1)">{{ genre.name }}</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="movies-container"
+    <section class="flex flex-row flex-wrap justify-center mx-5 lg:mx-20 z-0"
     infiniteScroll
     [infiniteScrollDistance]="2"
     [infiniteScrollThrottle]="50"
     (scrolled)="onScroll()"
     >
-        <h2 *ngIf="visibleMovies !== 'genre'">{{ title }}<hr></h2>
-        <h2 *ngIf="visibleMovies === 'genre'">{{ selectedGenreName }}<hr></h2>
-        <div *ngFor="let movie of currentMovies" class="movies">
+        <h2 *ngIf="visibleMovies !== 'genre'" class="w-full text-2xl mx-4 my-4 lg:mx-14 lg:my-10">{{ title }}<hr class="border border-solid border-yellow w-full"></h2>
+        <h2 *ngIf="visibleMovies === 'genre'" class="w-full text-2xl mx-4 my-4 lg:mx-14 lg:my-10">{{ selectedGenreName }}<hr class="border border-solid border-yellow w-full"></h2>
+        <div *ngFor="let movie of currentMovies" class="p-1 lg:p-2">
             <a [routerLink]="['/movies', movie.id]">
-                <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" [alt]="movie.title" width="180" />
+                <div class="relative">
+                    <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" [alt]="movie.title" class="w-36 lg:w-40" />
+                    <div class="opacity-0 absolute inset-0 flex text-center justify-center items-center bg-black bg-opacity-75 text-white text-lg transition duration-300 opacity-0 hover:opacity-100 focus:opacity-100">
+                        {{ movie.title }}
+                    </div>
+                </div>
             </a>
-            <div class="rating" *ngIf="visibleMovies === 'top_rated'">
-                <img src="../../../assets/star.png" alt="Rates" width="20" />
-                <span>{{ movie.vote_average }}</span>
+            <div class="flex flex-row mt-2 items-center" *ngIf="visibleMovies === 'top_rated'">
+                <img src="../../../assets/star.png" alt="Rates" class="w-4 h-4" />
+                <span class="ml-3">{{ movie.vote_average }}</span>
             </div>
         </div>
     </section>

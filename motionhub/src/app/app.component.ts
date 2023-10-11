@@ -5,17 +5,21 @@ import { SearchService } from './services/search.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
 })
 
 export class AppComponent {
   searchQuery: string = '';
   errorMessage: string = '';
+  isMenuOpen: boolean = false;
 
-  constructor(private router: Router, private searchService: SearchService) {}
+  constructor(private router: Router) {}
 
   isSearchActive(): boolean {
     return this.router.url !== '/home'; 
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
   displaySearchResults() {
@@ -23,5 +27,6 @@ export class AppComponent {
       this.router.navigate(['/search-results', this.searchQuery]);
     }
   }
+
 }
 

@@ -1,44 +1,39 @@
-<nav class="navbar" role="banner">
+<nav class="bg-dark w-screen h-16 flex items-center justify-between px-4 shadow">
   <a href="/home">
-    <img width="40" alt="MotionHub Logo" src="../assets/mhicon.png" />
+    <img alt="MotionHub Logo" src="../assets/mhicon.png" class="w-12" />
   </a>
 
-  <div *ngIf="isSearchActive()" class="tools">
+  <div *ngIf="isSearchActive()" class="flex flex-row justify-between items-center w-full">
 
-    <div class="navigation">
-      <a href="/home">Home</a>
-      <a href="/movies">Movies</a>
-      <a href="/tvshows">TV Shows</a>
+    <div class="flex flex-row justify-between bg-gray w-64 h-8 ml-10 border border-solid border-yellow p-1 lg:p-2 lg:h-12 lg:w-1/4 lg:ml-24">
+      <input type="text" placeholder="Search..." class="search" [(ngModel)]="searchQuery" class="bg-gray" />
+      <img src="../assets/search-icon.svg" alt="Seach icon" width="20" (click)="displaySearchResults()" />
     </div>
 
-    <div class="search-bar">
-      <input
-      type="text"
-      placeholder="Search..."
-      class="search"
-      [(ngModel)]="searchQuery"
-      />
-      <img
-      src="../assets/search-icon.svg"
-      alt="Seach icon"
-      width="20"
-      (click)="displaySearchResults()"/>
+    <div class="cursor-pointer ml-8 mr-0 lg:hidden" (click)="toggleMenu()">
+      <img *ngIf="!isMenuOpen" src="../assets/menu.svg" alt="Open menu" width="35" />
+      <img *ngIf="isMenuOpen" src="../assets/close.svg" alt="Close menu" width="30">
     </div>
-  
+
+    <div class="hidden flex flex-col absolute bg-dark p-4 top-16 right-0 h-full w-full font-koulen text-5xl lg:text-2xl lg:flex lg:flex-row lg:top-6 lg:h-8 lg:w-fit lg:p-0 z-10" [class.hidden]="!isMenuOpen">
+      <a href="/home" class="hover:text-yellow duration-500 mx-8 my-4 lg:my-0">Home</a>
+      <a href="/movies" class="hover:text-yellow duration-500 mx-8 my-4 lg:my-0">Movies</a>
+      <a href="/tvshows" class="hover:text-yellow duration-500 mx-8 my-4 lg:my-0">TV Shows</a>
+      <a href="/login" class="font-koulen text-yellow hover:text-white duration-500 mx-8 my-8 lg:my-0">Log In</a>
+    </div>
   </div>
-
 </nav>
 
 <main>
   <router-outlet></router-outlet>
 </main>
 
-<footer>
-  <span>© MotionHub</span>
-  <a href="https://github.com/AndressaSRodrigues">
+<footer class="w-screen flex flex-row justify-center items-center px-4">
+  <span class="text-sm font-koulen text-dark mr-4">© MotionHub</span>
+  <a href="https://github.com/AndressaSRodrigues" class="mr-4">
     <img src="../assets/github-icon.svg" alt="GitHub" width="30" />
   </a>
-  <a href="https://www.linkedin.com/in/andressa-webdev/">
+  <a href="https://www.linkedin.com/in/andressa-webdev/" class="mr-4">
     <img src="../assets/linkedin-icon.svg" alt="Linkedin" width="30" />
   </a>
 </footer>

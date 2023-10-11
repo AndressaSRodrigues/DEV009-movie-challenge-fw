@@ -20,3 +20,6 @@ body {
     border: 0;
     color: $white;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: $primary-font; }
