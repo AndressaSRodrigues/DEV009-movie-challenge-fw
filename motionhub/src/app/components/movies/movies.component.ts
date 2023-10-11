@@ -44,6 +44,7 @@ export class MoviesComponent implements OnInit {
   }
 
   displayMovies(kind: string | undefined, page: number, genreId?: number | undefined): void {
+    console.log(genreId)
     this.moviesService.getMovies(kind, page, genreId)
       .subscribe(
         (response: { results: Movie[] }): void => {
@@ -51,10 +52,14 @@ export class MoviesComponent implements OnInit {
           this.page = 1;
           this.loading = false;
   
-          if (this.selectedGenre !== null) {
-            const genre = this.genreTitles.find((genre) => genre.id === this.selectedGenre);
+          if (genreId !== undefined) {
+            const genre = this.genreTitles.find((genre) => genre.id === genreId);
+            this.selectedGenre = genreId;
             this.selectedGenreName = genre ? genre.name : '';
             console.log(this.selectedGenreName)
+            console.log(this.selectedGenre)
+            console.log(genre)
+            console.log(genre?.name)
           }
         }
       );
@@ -65,6 +70,7 @@ export class MoviesComponent implements OnInit {
       .subscribe(
         (response: { genres: Genres[] }): void => {
           this.genreTitles = response.genres;
+          console.log(this.genreTitles)
           this.loading = false;
         }
       );
