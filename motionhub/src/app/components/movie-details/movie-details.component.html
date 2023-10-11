@@ -1,7 +1,7 @@
 <section class="h-full">
 
     <section *ngIf="movieDetails"
-        class="flex flex-col items-start justify-start p-2 lg:flex-row lg:pt-0 lg:mr-40 lg:ml-40">
+        class="flex flex-col items-center justify-start p-2 lg:flex-row lg:pt-0 lg:mr-40 lg:ml-40 lg:items-start">
 
         <div class="mt-2 p-2 lg:flex-shrink-0 lg:w-2/5 lg:mt-5">
             <img [src]="'https://image.tmdb.org/t/p/w500/' + movieDetails.poster_path" [alt]="movieDetails.title"

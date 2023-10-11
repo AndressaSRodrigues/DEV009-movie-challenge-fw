@@ -53,7 +53,7 @@ export class MoviesComponent implements OnInit {
   ngOnInit(): void {
     this.displayMovies('popular', 1);
     this.displayGenres();
-    this.genresMenu;
+    console.log(this.showOptions)
   }
 
   displayMovies(kind: string, page: number) {

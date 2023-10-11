@@ -5,14 +5,18 @@
             (click)="toggleOptions()"
             *ngIf="isMobile" />
 
-        <div class="flex flex-row justify-around w-full text-2xl" *ngIf="showOptions || !isMobile">
+        <div class="flex flex-col items-start absolute top-40 bg-gray w-full text-2xl ml-4 lg:flex-row lg:justify-evenly lg:w-3/4 lg:top-28 lg:right-0 z-10" *ngIf="showOptions || !isMobile">
             <button [ngClass]="visibleMovies === 'popular' && !genresMenu ? 'text-yellow overline' : 'text-white'" (click)="displayMovies('popular', 2)">New & popular</button>
             <button [ngClass]="visibleMovies === 'upcoming' && !genresMenu ? 'text-yellow overline' : 'text-white'" (click)="displayMovies('upcoming', 1)">Upcoming</button>
             <button [ngClass]="visibleMovies === 'top_rated' && !genresMenu ? 'text-yellow overline' : 'text-white'" (click)="displayMovies('top_rated', 1)">Top Rated</button>
             <button [ngClass]="visibleMovies === 'genre' ? 'text-yellow overline' : 'text-white'" (click)="toggleGenresMenu()">Browse by genre</button>
         </div>
 
-        <div class="hidden flex flex-col absolute justify-center bg-dark p-2 lg:flex-wrap lg:w-96 lg:h-36 lg:top-40 lg:right-32 border border-solid border-yellow" [class.hidden]="!genresMenu">
+        <div class="hidden flex flex-col flex-wrap absolute h-52 w-full top-72 left-0 justify-center bg-dark p-2 lg:flex-wrap lg:w-96 lg:h-36 lg:top-40 lg:left-2/3 border border-solid border-yellow z-10" [class.hidden]="!genresMenu">
+            <div class="h-full p-1 cursor-pointer">
+                <img src="../../../assets/close.svg" alt="Close" width="15" (click)="toggleGenresMenu()">
+            </div>
+
             <div *ngFor="let genre of genreTitles">
                 <div>
                     <span class="text-1xl cursor-pointer hover:text-yellow" (click)="filterByGenre(genre.id, 1)">{{ genre.name }}</span>

@@ -1,6 +1,6 @@
 <nav class="bg-dark w-screen h-16 flex items-center justify-between px-4 shadow">
   <a href="/home">
-    <img width="40" alt="MotionHub Logo" src="../assets/mhicon.png" />
+    <img alt="MotionHub Logo" src="../assets/mhicon.png" class="w-12" />
   </a>
 
   <div *ngIf="isSearchActive()" class="flex flex-row justify-between items-center w-full">
@@ -15,7 +15,7 @@
       <img *ngIf="isMenuOpen" src="../assets/close.svg" alt="Close menu" width="30">
     </div>
 
-    <div class="hidden flex flex-col absolute bg-dark p-4 top-20 right-0 h-full w-full font-koulen text-5xl lg:text-2xl lg:flex lg:flex-row lg:top-6 lg:h-8 lg:w-fit lg:p-0 z-10" [class.hidden]="!isMenuOpen">
+    <div class="hidden flex flex-col absolute bg-dark p-4 top-16 right-0 h-full w-full font-koulen text-5xl lg:text-2xl lg:flex lg:flex-row lg:top-6 lg:h-8 lg:w-fit lg:p-0 z-10" [class.hidden]="!isMenuOpen">
       <a href="/home" class="hover:text-yellow duration-500 mx-8 my-4 lg:my-0">Home</a>
       <a href="/movies" class="hover:text-yellow duration-500 mx-8 my-4 lg:my-0">Movies</a>
       <a href="/tvshows" class="hover:text-yellow duration-500 mx-8 my-4 lg:my-0">TV Shows</a>
@@ -24,7 +24,7 @@
   </div>
 </nav>
 
-<main class="w-screen h-screen">
+<main>
   <router-outlet></router-outlet>
 </main>
 

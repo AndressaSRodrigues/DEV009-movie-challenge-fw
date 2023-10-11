@@ -20,7 +20,6 @@ export class AppComponent {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
-    console.log('Open')
   }
 
   displaySearchResults() {
