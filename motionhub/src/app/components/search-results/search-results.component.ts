@@ -5,8 +5,8 @@ import { SearchService } from 'src/app/services/search.service';
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.scss']
 })
+
 export class SearchResultsComponent implements OnInit {
   searchQuery: string = '';
   searchResults: any[] = [];

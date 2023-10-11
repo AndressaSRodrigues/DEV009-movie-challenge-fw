@@ -1,23 +1,23 @@
-<section class="home-main">
+<section class="h-full w-full flex flex-col justify-start items-center p-10">
 
-    <picture>
-        <source media="(max-width: 900px)" srcset="../../assets/logomobile.png">
-        <img src="../../assets/mhlogo.png" alt="MotionHub Logo" width="auto" height="auto" class="logo" />
+    <picture class="flex flex-col items-center">
+        <source media="(max-width: 900px)" srcset="../../assets/logomobile.png" />
+        <img src="../assets/mhlogo.png" alt="MotionHub Logo" width="800" height="auto" class="logo" />
     </picture>
 
-    <span class="slogan">Your Personal Movie Showcase and Library</span>
+    <span class="text-2xl p-2 text-center">Your Personal Movie Showcase and Library</span>
 
-    <div class="redirect">
-        <div class="redirect-buttons">
-            <a href="/movies" class="movies">
-                Movies
-            </a>
-        </div>
-        <div class="redirect-buttons">
-            <a href="/tvshows" class="links">
-                TV Shows
-            </a>
-        </div>
+    <div class="h-1/2">
+
     </div>
 
+    <span>Explore now</span>
+    <div class="h-24 w-full flex flex-row justify-center items-center text-2xl">
+        <a href="/movies" class="w-32 h-12 mx-2 p-2 bg-dark text-center hover:text-yellow">
+            Movies
+        </a>
+        <a href="/tvshows" class="w-32 h-12 mx-2 p-2 bg-dark text-center hover:text-yellow">
+            TV Shows
+        </a>
+    </div>
 </section>

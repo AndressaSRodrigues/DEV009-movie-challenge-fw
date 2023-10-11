@@ -10,7 +10,6 @@ interface Movie {
   popularity: number;
   vote_average: number;
   release_date: string;
-  optional?: any; // an example of optional properties
 }
 
 interface Genres {
@@ -21,7 +20,6 @@ interface Genres {
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.scss']
 })
 
 export class MoviesComponent implements OnInit {
@@ -47,6 +45,7 @@ export class MoviesComponent implements OnInit {
 
   toggleGenresMenu() {
     this.genresMenu = !this.genresMenu;
+    console.log('Click click', this.genresMenu)
   }
 
   constructor(private moviesService: MoviesService) { }
@@ -54,6 +53,7 @@ export class MoviesComponent implements OnInit {
   ngOnInit(): void {
     this.displayMovies('popular', 1);
     this.displayGenres();
+    this.genresMenu;
   }
 
   displayMovies(kind: string, page: number) {
@@ -91,16 +91,13 @@ export class MoviesComponent implements OnInit {
 
   filterByGenre(genreId: number, page: number): void {
 
-    if (this.loading) {
-      return;
-    }
-
     this.selectedGenre = genreId;
     this.loading = true;
 
     this.moviesService.getMoviesByGenre(genreId, page)
     .subscribe((response: { results: Movie[] }) => {
       this.currentMovies = response.results;
+      console.log(this.currentMovies)
       this.page = 1;
       this.loading = false;
 
@@ -151,7 +148,7 @@ export class MoviesComponent implements OnInit {
     this.isMobile = window.innerWidth <= 1024;
   }
 
-  @HostListener('window:click', ['$event'])
+/*   @HostListener('window:click', ['$event'])
   onClick(event: MouseEvent): void {
     const clickedElement = event.target as HTMLElement;
     const isClickInsideOptionsIcon = clickedElement.classList.contains('options-icon');
@@ -183,4 +180,5 @@ export class MoviesComponent implements OnInit {
     }
     return this.isDescendantOfOptionsContainer(element.parentElement as HTMLElement);
   }
+   */
 }
