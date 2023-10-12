@@ -12,6 +12,8 @@ import { SearchResultsComponent } from './components/search-results/search-resul
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TvshowsMenuComponent } from './components/tvshows-menu/tvshows-menu.component';
+import { TvshowsCardComponent } from './components/tvshows-card/tvshows-card.component';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TvshowsComponent,
     SearchResultsComponent,
     MovieDetailsComponent,
+    TvshowsMenuComponent,
+    TvshowsCardComponent,
   ],
   imports: [
     BrowserModule,
