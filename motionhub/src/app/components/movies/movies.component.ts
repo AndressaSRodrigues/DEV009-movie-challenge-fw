@@ -12,21 +12,17 @@ export class MoviesComponent implements OnInit {
   showOptions: boolean = false;
   isMobile: boolean = false;
   genresMenu: boolean = false;
-  loading: boolean = false;
 
   title: string = '';
-
   currentMovies: Movie[] = [];
-  visibleMovies: string = 'popular';
+  visibleMovies: string | undefined = 'popular';
 
-  selectedGenre: number | undefined = undefined;
-  
-  selectedGenreName: string = '';
   genreTitles: Genres[] = [];
+  selectedGenre: number | undefined = undefined;
+  selectedGenreName: string = '';
 
-
+  loading: boolean = false;
   page: number = 1;
-
 
   toggleOptions() {
     this.showOptions = !this.showOptions;
@@ -44,22 +40,34 @@ export class MoviesComponent implements OnInit {
   }
 
   displayMovies(kind: string | undefined, page: number, genreId?: number | undefined): void {
-    console.log(genreId)
     this.moviesService.getMovies(kind, page, genreId)
       .subscribe(
         (response: { results: Movie[] }): void => {
           this.currentMovies = response.results;
+          this.visibleMovies = kind;
           this.page = 1;
           this.loading = false;
+          this.showOptions = false;
+          this.genresMenu = false;
   
           if (genreId !== undefined) {
             const genre = this.genreTitles.find((genre) => genre.id === genreId);
             this.selectedGenre = genreId;
             this.selectedGenreName = genre ? genre.name : '';
-            console.log(this.selectedGenreName)
-            console.log(this.selectedGenre)
-            console.log(genre)
-            console.log(genre?.name)
+          }
+
+          switch (this.visibleMovies) {
+            case 'popular':
+              this.title = 'New & Popular';
+              break;
+            case 'upcoming':
+              this.title = 'Upcoming';
+              break;
+            case 'top_rated':
+              this.title = 'Top Rated';
+              break;
+            default:
+              this.title = '';
           }
         }
       );
@@ -70,7 +78,6 @@ export class MoviesComponent implements OnInit {
       .subscribe(
         (response: { genres: Genres[] }): void => {
           this.genreTitles = response.genres;
-          console.log(this.genreTitles)
           this.loading = false;
         }
       );
