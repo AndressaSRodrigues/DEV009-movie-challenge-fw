@@ -1,0 +1,20 @@
+<section>
+    <h1 class="text-6xl text-yellow mx-4 my-4 lg:mx-14 lg:my-10">TV Shows</h1>
+
+    <img src="../../../assets/arrow-down.svg" alt="More options" width="30" class="options-icon"
+    (click)="toggleOptions()" *ngIf="isMobile" />
+
+    <div class="flex flex-col items-start absolute top-40 bg-gray w-full text-2xl ml-4 lg:flex-row lg:justify-evenly lg:w-3/4 lg:top-28 lg:right-0 z-10">
+        <button [ngClass]="menuOptionSelected === 'popular' ? 'text-yellow overline' : 'text-white'" (click)="selectKind('popular')">Popular</button>
+        <button [ngClass]="menuOptionSelected === 'top_rated' ? 'text-yellow overline' : 'text-white'" (click)="selectKind('top_rated')">Top Rated</button>
+        <button [ngClass]="menuOptionSelected === 'on_the_air' ? 'text-yellow overline' : 'text-white'" (click)="selectKind('on_the_air')">On the Air</button>
+        <button [ngClass]="menuOptionSelected === 'browse_by_genre' ? 'text-yellow overline' : 'text-white'" (click)="toggleGenresMenu()">Browse by genre</button>
+    </div>
+
+    <div *ngIf="genresMenu">
+        <div *ngFor="let genre of genres">
+            <span (click)="selectGenre(genre.id)">{{ genre.name }}</span>
+        </div>
+    </div>
+
+</section>

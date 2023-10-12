@@ -1,1 +1,5 @@
-<p>tvshows works!</p>
+<section class="h-full">
+    <tvshows-menu (kindSelected)="onKindSelected($event)" (genreSelected)="onGenreSelected($event)"></tvshows-menu>
+    <tvshows-card [selectedKind]="selectedKind" [selectedGenre]="selectedGenre"></tvshows-card>
+</section>
+  
