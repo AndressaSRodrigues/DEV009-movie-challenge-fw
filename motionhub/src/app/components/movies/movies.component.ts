@@ -12,21 +12,17 @@ export class MoviesComponent implements OnInit {
   showOptions: boolean = false;
   isMobile: boolean = false;
   genresMenu: boolean = false;
-  loading: boolean = false;
 
   title: string = '';
-
   currentMovies: Movie[] = [];
-  visibleMovies: string = 'popular';
+  visibleMovies: string | undefined = 'popular';
 
-  selectedGenre: number | undefined = undefined;
-  
-  selectedGenreName: string = '';
   genreTitles: Genres[] = [];
+  selectedGenre: number | undefined = undefined;
+  selectedGenreName: string = '';
 
-
+  loading: boolean = false;
   page: number = 1;
-
 
   toggleOptions() {
     this.showOptions = !this.showOptions;
@@ -48,13 +44,30 @@ export class MoviesComponent implements OnInit {
       .subscribe(
         (response: { results: Movie[] }): void => {
           this.currentMovies = response.results;
+          this.visibleMovies = kind;
           this.page = 1;
           this.loading = false;
+          this.showOptions = false;
+          this.genresMenu = false;
   
-          if (this.selectedGenre !== null) {
-            const genre = this.genreTitles.find((genre) => genre.id === this.selectedGenre);
+          if (genreId !== undefined) {
+            const genre = this.genreTitles.find((genre) => genre.id === genreId);
+            this.selectedGenre = genreId;
             this.selectedGenreName = genre ? genre.name : '';
-            console.log(this.selectedGenreName)
+          }
+
+          switch (this.visibleMovies) {
+            case 'popular':
+              this.title = 'New & Popular';
+              break;
+            case 'upcoming':
+              this.title = 'Upcoming';
+              break;
+            case 'top_rated':
+              this.title = 'Top Rated';
+              break;
+            default:
+              this.title = '';
           }
         }
       );

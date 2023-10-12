@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, catchError } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root' // service should be provided at the root level
+  providedIn: 'root'
 })
 
 export class MoviesService {
