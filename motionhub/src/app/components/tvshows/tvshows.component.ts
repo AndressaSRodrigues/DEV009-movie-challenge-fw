@@ -8,18 +8,21 @@ import { Component } from '@angular/core';
 export class TvshowsComponent {
   selectedKind: string | undefined = undefined;
   selectedGenre: number | undefined = undefined;
+  selectedGenreName: string | undefined = undefined;
 
   onKindSelected(kind: string) {
     this.selectedKind = kind;
     this.selectedGenre = undefined;
-    console.log(this.selectedGenre)
-    console.log(this.selectedKind)
   }
 
   onGenreSelected(genreId: number | undefined) {
     this.selectedGenre = genreId;
     this.selectedKind = undefined;
-    console.log(genreId, 'this is in tvshows')
-    console.log(this.selectedKind)
+    console.log(genreId);
+  }
+
+  onGenreNameSelected(genreName: string | undefined) {
+    this.selectedGenreName = genreName;
+    console.log(genreName);
   }
 }

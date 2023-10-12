@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, catchError } from 'rxjs';
+import { Observable, throwError, catchError, map } from 'rxjs';
+import { Genres } from '../components/interfaces/genres.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,14 +25,14 @@ export class TvshowsService {
     );
   }
 
-
-  getGenres(): Observable<any> {
+  getGenres(): Observable<Genres[]> {
     return this.http.get(`${this.apiUrl}/genre/tv/list?api_key=${this.apiKey}`)
       .pipe(
+        map((response: any) => response.genres as Genres[]),
         catchError(this.handleError)
       );
   }
-
+  
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error('An error occurred:', error.error);

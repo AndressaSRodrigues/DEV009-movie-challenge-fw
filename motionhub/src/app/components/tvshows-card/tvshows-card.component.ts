@@ -17,9 +17,9 @@ interface TvShows {
 export class TvshowsCardComponent implements OnInit, OnChanges {
   @Input() selectedKind: string | undefined = 'popular';
   @Input() selectedGenre: number | undefined = undefined;
-  @Input() selectedGenreName: string = '';
+  @Input() selectedGenreName: string | undefined = undefined;
 
-  title: string = 'New & Popular'
+  title: string | undefined = 'New & Popular'
   onDisplay: string | undefined = 'popular'
   tvshows: TvShows[] = [];
 
@@ -44,13 +44,11 @@ export class TvshowsCardComponent implements OnInit, OnChanges {
   }
   
   fetchTvShows(kind: string | undefined, page: number, genreId?: number | undefined): void {
-    console.log(genreId)
       this.tvServices.getTvShows(kind, page, genreId)
         .subscribe((response: { results: TvShows[] }) => {
           this.tvshows = response.results;
-          console.log(this.tvshows);
-
           this.onDisplay = kind;
+
           switch (this.onDisplay) {
             case 'popular':
               this.title = 'New & Popular';
@@ -61,8 +59,16 @@ export class TvshowsCardComponent implements OnInit, OnChanges {
             case 'top_rated':
               this.title = 'Top Rated';
               break;
+              case 'top_rated':
+              this.title = 'Top Rated';
+              break;
             default:
               this.title = '';
+          }
+
+          console.log(this.selectedGenreName, 'THIS IS SUPPOSED TO BE THE NAME')
+          if (genreId !== undefined) {
+            this.title = this.selectedGenreName;
           }
         });
   }
@@ -88,5 +94,3 @@ export class TvshowsCardComponent implements OnInit, OnChanges {
     console.log(this.page)
   }
 }
-
-

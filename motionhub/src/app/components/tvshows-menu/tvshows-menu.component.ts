@@ -14,6 +14,7 @@ interface Genres {
 export class TvshowsMenuComponent implements OnInit {
   @Output() kindSelected: EventEmitter<string> = new EventEmitter<string>();
   @Output() genreSelected: EventEmitter<number> = new EventEmitter<number>();
+  @Output() genreNameSelected: EventEmitter<string> = new EventEmitter<string>();
 
   menuOptionSelected: string = 'popular';
   genres: Genres[] = [];
@@ -38,12 +39,12 @@ export class TvshowsMenuComponent implements OnInit {
   displayGenres() {
     this.tvService.getGenres()
       .subscribe(
-        (response: { genres: Genres[] }): void => {
-          this.genres = response.genres;
-          console.log(this.genres)
+        (response) => {
+          this.genres = response;
+          console.log(this.genres);
         }
       );
-  }
+  }  
 
   selectKind(kind: string) {
     this.menuOptionSelected = kind;
@@ -51,12 +52,12 @@ export class TvshowsMenuComponent implements OnInit {
     console.log(kind)
   }
 
-  selectGenre(genreId: number) {
+  selectGenre(genreId: number, genreName: string) {
     this.menuOptionSelected = 'browse_by_genre';
     this.genreSelected.emit(genreId);
+    this.genreNameSelected.emit(genreName);
     this.genresMenu = false;
-    console.log(genreId)
-  }
+  }  
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
