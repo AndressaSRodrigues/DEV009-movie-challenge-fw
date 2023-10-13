@@ -1,0 +1,30 @@
+<section class="flex flex-row flex-wrap justify-center mx-5 lg:mx-20 z-0" infiniteScroll
+        [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+
+        <h2 *ngIf="onDisplay !== undefined" class="w-full text-2xl mx-4 my-4 lg:mx-14 lg:my-10">
+            {{ title }}
+            <hr class="border border-solid border-yellow w-full">
+        </h2>
+
+        <h2 *ngIf="onDisplay === undefined" class="w-full text-2xl mx-4 my-4 lg:mx-14 lg:my-10">
+        {{ selectedGenreName }}
+            <hr class="border border-solid border-yellow w-full">
+        </h2>
+
+        <div *ngFor="let movie of currentMovies" class="p-1 lg:p-2">
+            <a [routerLink]="['/movies', movie.id]" target="_blank">
+                <div class="relative">
+                    <img [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" [alt]="movie.title"
+                        class="w-36 lg:w-40" />
+                    <div
+                        class="opacity-0 absolute inset-0 flex text-center justify-center items-center bg-black bg-opacity-75 text-white text-lg transition duration-300 opacity-0 hover:opacity-100 focus:opacity-100">
+                        {{ movie.title }}
+                    </div>
+                </div>
+            </a>
+            <div class="flex flex-row mt-2 items-center" *ngIf="onDisplay === 'top_rated'">
+                <img src="../../../assets/star.png" alt="Rates" class="w-4 h-4" />
+                <span class="ml-3">{{ movie.vote_average }}</span>
+            </div>
+        </div>
+    </section>
