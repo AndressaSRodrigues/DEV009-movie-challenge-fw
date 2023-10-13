@@ -71,7 +71,7 @@ export class MoviesCardComponent implements OnInit, OnChanges {
     }
 
     this.loading = true;
-    this.moviesService.getMovies(this.type, this.page + 1)
+    this.moviesService.getMovies(this.type, this.page + 1, this.selectedGenre)
       .subscribe(
         (response: { results: Movie[] }) => {
           this.currentMovies = this.currentMovies.concat(response.results);
