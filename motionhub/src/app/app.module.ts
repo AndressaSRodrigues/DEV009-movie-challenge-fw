@@ -15,6 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TvshowsMenuComponent } from './components/tvshows-menu/tvshows-menu.component';
 import { TvshowsCardComponent } from './components/tvshows-card/tvshows-card.component';
 import { TvshowDetailsComponent } from './components/tvshow-details/tvshow-details.component';
+import { MoviesCardComponent } from './components/movies-card/movies-card.component';
+import { MoviesMenuComponent } from './components/movies-menu/movies-menu.component';
 
 
 @NgModule({
@@ -28,6 +30,8 @@ import { TvshowDetailsComponent } from './components/tvshow-details/tvshow-detai
     TvshowsMenuComponent,
     TvshowsCardComponent,
     TvshowDetailsComponent,
+    MoviesCardComponent,
+    MoviesMenuComponent,
   ],
   imports: [
     BrowserModule,
