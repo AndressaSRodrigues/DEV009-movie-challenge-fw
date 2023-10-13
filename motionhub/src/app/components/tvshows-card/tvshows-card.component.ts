@@ -73,7 +73,7 @@ export class TvshowsCardComponent implements OnInit, OnChanges {
     }
 
     this.loading = true;
-    this.tvServices.getTvShows(this.type, this.page + 1)
+    this.tvServices.getTvShows(this.type, this.page + 1, this.selectedGenre)
       .subscribe(
         (response: { results: TvShows[] }) => {
           this.tvshows = this.tvshows.concat(response.results);
