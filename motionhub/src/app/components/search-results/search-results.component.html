@@ -10,11 +10,22 @@
         <p class="font-koulen text-3xl" *ngIf="searchResults.length === 0">{{ message }}</p>
 
         <div *ngFor="let item of searchResults">
-            <a [routerLink]="['/movies', item.id]">
-                <div *ngIf="item.poster_path" class="m-1 lg:m-2">
-                    <img [src]="'https://image.tmdb.org/t/p/w500/' + item.poster_path" [alt]="item.title" width="180" class="w-36 lg:w-44" />
-                </div>
-            </a>
+            <ng-container *ngIf="item.media_type === 'movie' then movieLink else tvShowLink"></ng-container>
+            <ng-template #movieLink>
+                <a [routerLink]="['/movies', item.id]" target="_blank">
+                    <div *ngIf="item.poster_path" class="m-1 lg:m-2">
+                        <img [src]="'https://image.tmdb.org/t/p/w500/' + item.poster_path" [alt]="item.title" width="180" class="w-36 lg:w-44" />
+                    </div>
+                </a>
+            </ng-template>
+            <ng-template #tvShowLink>
+                <a [routerLink]="['/tvshows', item.id]" target="_blank">
+                    <div *ngIf="item.poster_path" class="m-1 lg:m-2">
+                        <img [src]="'https://image.tmdb.org/t/p/w500/' + item.poster_path" [alt]="item.title" width="180" class="w-36 lg:w-44" />
+                    </div>
+                </a>
+            </ng-template>
+
             <div *ngIf="item.profile_path" class="m-1 lg:m-2">
                 <img [src]="'https://image.tmdb.org/t/p/original/' + item.profile_path" [alt]="item.name" width="180" class="w-36 lg:w-44" />
             </div>
