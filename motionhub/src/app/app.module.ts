@@ -14,6 +14,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TvshowsMenuComponent } from './components/tvshows-menu/tvshows-menu.component';
 import { TvshowsCardComponent } from './components/tvshows-card/tvshows-card.component';
+import { TvshowDetailsComponent } from './components/tvshow-details/tvshow-details.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { TvshowsCardComponent } from './components/tvshows-card/tvshows-card.com
     MovieDetailsComponent,
     TvshowsMenuComponent,
     TvshowsCardComponent,
+    TvshowDetailsComponent,
   ],
   imports: [
     BrowserModule,

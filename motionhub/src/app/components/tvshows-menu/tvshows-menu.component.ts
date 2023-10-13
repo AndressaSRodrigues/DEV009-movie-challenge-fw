@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Output, OnInit, HostListener, SimpleChanges } from '@angular/core';
-import { TvshowsService } from 'src/app/services/tvshows.service';
+import { Component, EventEmitter, Output, OnInit, HostListener } from '@angular/core';
+import { TvshowsService } from 'src/app/services/tvShowsService/tvshows.service';
 
 interface Genres {
   id: number,
@@ -19,7 +19,7 @@ export class TvshowsMenuComponent implements OnInit {
   menuOptionSelected: string = 'popular';
   genres: Genres[] = [];
   genresMenu: boolean = false;
-  isMobile: boolean = false;
+  isMobile: boolean = window.innerWidth <= 1024;
   showOptions: boolean =  false;
 
   toggleGenresMenu() {

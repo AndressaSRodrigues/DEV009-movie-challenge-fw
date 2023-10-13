@@ -1,29 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MoviesService } from 'src/app/services/movies.service';
-
-interface Movie {
-  id: number;
-  title: string;
-  tagline: string;
-  genres: { id: number; name: string }[];
-  poster_path: string;
-  overview: string;
-  vote_average: number;
-  release_date: string;
-  runtime: number;
-  original_language: string;
-  credits: {
-    cast: Actor[];
-  };
-  optional?: any; // an example of optional properties
-}
-
-interface Actor {
-  name: string;
-  character: string;
-  profile_path: string;
-}
+import { MoviesService } from 'src/app/services/moviesService/movies.service';
+import { Movie } from '../../interfaces/movie.interface';
 
 @Component({
   selector: 'app-movie-details',

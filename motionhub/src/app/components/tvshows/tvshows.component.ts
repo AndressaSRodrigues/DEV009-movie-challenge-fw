@@ -23,6 +23,6 @@ export class TvshowsComponent {
 
   onGenreNameSelected(genreName: string | undefined) {
     this.selectedGenreName = genreName;
-    console.log(genreName);
+    console.log(genreName, 'this is in tv shows');
   }
 }

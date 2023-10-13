@@ -1,0 +1,60 @@
+<section class="h-full">
+
+    <section *ngIf="showDetails"
+        class="flex flex-col items-center justify-start p-2 lg:flex-row lg:pt-0 lg:mr-40 lg:ml-40 lg:items-start">
+
+        <div class="mt-2 p-2 lg:flex-shrink-0 lg:w-2/5 lg:mt-5">
+            <img [src]="'https://image.tmdb.org/t/p/w500/' + showDetails.poster_path" [alt]="showDetails.name"
+                width="500" />
+        </div>
+
+        <div class="font-koulen text-lg mx-5 lg:mt-12 lg:mx-20">
+            <h1 class="font-koulen text-5xl text-yellow mt-5 mb-5">{{ showDetails.name }}</h1>
+            <div class="flex flex-row justify-between mb-5">
+                <span class="lg:mr-5 lg:text-lg">{{ showDetails.status}}</span>
+                <span class="lg:mr-5 lg:text-lg">{{ showDetails.number_of_seasons}} seasons</span>
+                <span class="lg:mr-5 lg:text-lg">{{ showDetails.number_of_episodes }} episodes</span>
+                <div class="flex flex-row">
+                    <img src="../../../assets/star.png" alt="Rating star" class="mr-1 w-6 h-6 lg:w-8 lg:h-8" />
+                    <span class="lg:text-2xl">{{ showDetails.vote_average | number: '1.1-1' }}</span>
+                </div>
+            </div>
+
+             <div class="flex flex-wrap flex-row justify-around mb-5 lg:justify-start">
+                <div *ngFor="let genre of showDetails.genres.slice(0, 3)" class="flex items-center mr-2 mb-2">
+                    <span class="border border-solid border-yellow p-2 text-sm text-center w-28 lg:w-32 lg:text-lg">{{
+                        genre.name }}</span>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap flex-row justify-around mb-5 lg:justify-start">
+                <span class="lg:mr-5 lg:text-lg">First air date: {{ showDetails.first_air_date | date: 'yyyy' }}</span>
+                <span class="lg:mr-5 lg:text-lg">Average episode duration: {{ showDetails.episode_run_time }}</span>
+            </div>
+
+            <p class="font-montserrat mb-5 lg:mb-10">{{ showDetails.overview }}</p>
+
+            <span>Last episode to air: {{ showDetails.last_episode_to_air.name }}</span>
+            <p class="font-montserrat mb-5 lg:mb-10">{{ showDetails.last_episode_to_air.overview }}</p>
+
+            <h2 class="text-yellow text-2xl mb-5 lg:text-3xl">Main Actors</h2>
+
+            <div class="flex flex-row flex-wrap justify-center">
+                <div *ngFor="let actor of showDetails.credits.cast.slice(0, 6)" class="justify-center m-2 lg:w-1/4">
+                    <div *ngIf="actor.profile_path">
+                        <img [src]="'https://image.tmdb.org/t/p/original/' + actor.profile_path" [alt]="actor.name"
+                            class="border border-solid border-yellow w-24" />
+                    </div>
+
+                    <div *ngIf="!actor.profile_path">
+                        <img src="../../../assets/no-picture.png" alt="No picture available" width="180"
+                            class="border border-solid border-yellow w-24" />
+                    </div>
+                    <span class="text-sm">{{ actor.name }}</span>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</section>
