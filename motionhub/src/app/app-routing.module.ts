@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { MoviesComponent } from './components/movies/movies.component';
-import { TvshowsComponent } from './components/tvshows/tvshows.component';
-import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { HomeComponent } from './routes/home/home.component';
+import { MoviesComponent } from './routes/movies/movies.component';
+import { TvshowsComponent } from './routes/tvshows/tvshows.component';
+import { SearchResultsComponent } from './routes/search-results/search-results.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { TvshowDetailsComponent } from './components/tvshow-details/tvshow-details.component';
 

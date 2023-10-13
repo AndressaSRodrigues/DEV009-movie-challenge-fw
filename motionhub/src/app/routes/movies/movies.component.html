@@ -1,0 +1,6 @@
+<section class="h-full">
+    <app-movies-menu (kindSelected)="onKindSelected($event)" (genreSelected)="onGenreSelected($event)"
+        (genreNameSelected)="onGenreNameSelected($event)"></app-movies-menu>
+    <app-movies-card [selectedKind]="selectedKind" [selectedGenre]="selectedGenre"
+        [selectedGenreName]="selectedGenreName"></app-movies-card>
+</section>
