@@ -1,13 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { TvshowsService } from 'src/app/services/tvshows.service';
-import { Genres } from '../interfaces/genres.interface';
-
-interface TvShows {
-  id: number;
-  name: string;
-  poster_path: string;
-  vote_average: number;
-}
+import { TvshowsService } from 'src/app/services/tvShowsService/tvshows.service';
+import { Genres } from '../../interfaces/genres.interface';
+import { TvShows } from 'src/app/interfaces/tvshow.interface';
 
 @Component({
   selector: 'tvshows-card',

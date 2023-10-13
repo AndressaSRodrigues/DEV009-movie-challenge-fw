@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { MoviesService } from 'src/app/services/movies.service';
-import { Movie } from 'src/app/components/interfaces/movie.interface';
-import { Genres } from 'src/app/components/interfaces/genres.interface';
+import { MoviesService } from 'src/app/services/moviesService/movies.service';
+import { Movie } from 'src/app/interfaces/movie.interface';
+import { Genres } from 'src/app/interfaces/genres.interface';
 
 @Component({
   selector: 'app-movies',
@@ -32,7 +32,9 @@ export class MoviesComponent implements OnInit {
     this.genresMenu = !this.genresMenu;
   }
   
-  constructor(private moviesService: MoviesService) { }
+  constructor(private moviesService: MoviesService) {
+    this.isMobile = window.innerWidth <= 1024;
+   }
 
   ngOnInit(): void {
     this.displayMovies('popular', 1);

@@ -1,11 +1,10 @@
-<section>
+<section class="flex flex-row justify-start mx-5 lg:mx-20">
     <h1 class="text-6xl text-yellow mx-4 my-4 lg:mx-14 lg:my-10">TV Shows</h1>
-
     <img src="../../../assets/arrow-down.svg" alt="More options" width="30" class="options-icon"
         (click)="toggleOptions()" *ngIf="isMobile" />
 
-    <div
-        class="flex flex-col items-start absolute top-40 bg-gray w-full text-2xl ml-4 lg:flex-row lg:justify-evenly lg:w-3/4 lg:top-28 lg:right-0 z-10">
+    <div *ngIf="showOptions || !isMobile"
+        class="flex flex-col items-start absolute top-40 bg-gray w-full text-2xl ml-4 lg:flex-row lg:justify-evenly lg:w-3/4 lg:top-28 lg:right-0 lg:bg-transparent z-10">
         <button [ngClass]="menuOptionSelected === 'popular' ? 'text-yellow overline' : 'text-white'"
             (click)="selectKind('popular')">Popular</button>
         <button [ngClass]="menuOptionSelected === 'top_rated' ? 'text-yellow overline' : 'text-white'"

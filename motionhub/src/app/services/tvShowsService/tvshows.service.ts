@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, catchError, map } from 'rxjs';
-import { Genres } from '../components/interfaces/genres.interface';
+import { Genres } from '../../interfaces/genres.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,13 @@ export class TvshowsService {
     .pipe(
       catchError(this.handleError)
     );
+  }
+
+  getShowDetails(showId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/tv/${showId}?api_key=${this.apiKey}&append_to_response=credits`)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   getGenres(): Observable<Genres[]> {
