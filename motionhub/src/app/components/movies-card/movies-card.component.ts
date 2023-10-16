@@ -1,14 +1,15 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Movie } from 'src/app/interfaces/movie.interface';
 import { Genres } from 'src/app/interfaces/genres.interface';
 import { MoviesService } from 'src/app/services/moviesService/movies.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-movies-card',
   templateUrl: './movies-card.component.html',
 })
 
-export class MoviesCardComponent implements OnInit, OnChanges {
+export class MoviesCardComponent implements OnInit, OnChanges, OnDestroy {
   @Input() selectedKind: string | undefined = 'popular';
   @Input() selectedGenre: number | undefined = undefined;
   @Input() selectedGenreName: string | undefined = undefined;
@@ -21,7 +22,9 @@ export class MoviesCardComponent implements OnInit, OnChanges {
 
   page: number = 1;
   loading: boolean = false;
-  type: string | undefined = this.selectedKind; 
+  type: string | undefined = this.selectedKind;
+
+  subscription: Subscription = new Subscription();
 
   constructor(private moviesService: MoviesService) {}
 
@@ -37,8 +40,12 @@ export class MoviesCardComponent implements OnInit, OnChanges {
     : null;
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   fetchMovies(kind: string | undefined, page: number, genreId?: number | undefined): void {
-    this.moviesService.getMovies(kind, page, genreId)
+    this.subscription = this.moviesService.getMovies(kind, page, genreId)
       .subscribe(
         (response: { results: Movie[] }): void => {
           this.currentMovies = response.results;
