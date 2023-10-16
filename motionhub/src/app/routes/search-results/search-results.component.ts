@@ -26,7 +26,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
           .subscribe(
             (response: { results: any[] }) => {
               this.searchResults = response.results;
-              console.log(response.results)
             }
           )
       });

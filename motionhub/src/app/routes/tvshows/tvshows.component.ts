@@ -18,11 +18,9 @@ export class TvshowsComponent {
   onGenreSelected(genreId: number | undefined) {
     this.selectedGenre = genreId;
     this.selectedKind = undefined;
-    console.log(genreId);
   }
 
   onGenreNameSelected(genreName: string | undefined) {
     this.selectedGenreName = genreName;
-    console.log(genreName, 'this is in tv shows');
   }
 }

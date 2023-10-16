@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { SearchService } from './services/searchServices/search.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +26,5 @@ export class AppComponent {
       this.router.navigate(['/search-results', this.searchQuery]);
     }
   }
-
 }
 

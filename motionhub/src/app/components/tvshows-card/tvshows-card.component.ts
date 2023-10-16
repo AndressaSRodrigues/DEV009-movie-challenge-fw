@@ -60,7 +60,6 @@ export class TvshowsCardComponent implements OnInit, OnChanges {
               this.title = '';
           }
 
-          console.log(this.selectedGenreName, 'THIS IS SUPPOSED TO BE THE NAME')
           if (genreId !== undefined) {
             this.title = this.selectedGenreName;
           }
@@ -85,6 +84,5 @@ export class TvshowsCardComponent implements OnInit, OnChanges {
 
   onScroll() {
     this.loadShows();
-    console.log(this.page)
   }
 }

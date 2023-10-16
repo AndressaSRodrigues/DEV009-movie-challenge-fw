@@ -53,7 +53,6 @@ export class MoviesMenuComponent implements OnInit, OnDestroy {
     this.showOptions = !this.showOptions;
     this.genresMenu = false;
     this.kindSelected.emit(kind);
-    console.log(kind, 'in movies menu')
   }
 
   selectGenre(genreId: number, genreName: string) {
@@ -62,7 +61,6 @@ export class MoviesMenuComponent implements OnInit, OnDestroy {
     this.genresMenu = false;
     this.genreSelected.emit(genreId);
     this.genreNameSelected.emit(genreName);
-    console.log(genreName, 'in movies menu')
   }  
 
   @HostListener('window:resize', ['$event'])

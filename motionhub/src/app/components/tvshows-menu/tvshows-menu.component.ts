@@ -37,7 +37,6 @@ export class TvshowsMenuComponent implements OnInit {
       .subscribe(
         (response) => {
           this.genres = response;
-          console.log(this.genres);
         }
       );
   }  
@@ -45,7 +44,6 @@ export class TvshowsMenuComponent implements OnInit {
   selectKind(kind: string) {
     this.menuOptionSelected = kind;
     this.kindSelected.emit(kind);
-    console.log(kind)
   }
 
   selectGenre(genreId: number, genreName: string) {
