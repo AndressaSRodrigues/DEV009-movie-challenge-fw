@@ -1,14 +1,15 @@
-import { Component, EventEmitter, Output, OnInit, HostListener } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { MoviesService } from 'src/app/services/moviesService/movies.service';
 import { Genres } from 'src/app/interfaces/genres.interface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-movies-menu',
   templateUrl: './movies-menu.component.html',
 })
 
-export class MoviesMenuComponent implements OnInit {
-  @Output() kindSelected: EventEmitter<string> = new EventEmitter<string>();
+export class MoviesMenuComponent implements OnInit, OnDestroy {
+  @Output() kindSelected: EventEmitter<string> = new EventEmitter<string>(); //Output is a decorator - EventEmitter is a class
   @Output() genreSelected: EventEmitter<number> = new EventEmitter<number>();
   @Output() genreNameSelected: EventEmitter<string> = new EventEmitter<string>();
 
@@ -26,14 +27,20 @@ export class MoviesMenuComponent implements OnInit {
     this.showOptions = !this.showOptions;
   }
 
+  subscription: Subscription = new Subscription();
+
   constructor(private moviesService: MoviesService) {}
 
   ngOnInit(): void {
     this.displayGenres();
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   displayGenres() {
-    this.moviesService.getGenres()
+    this.subscription = this.moviesService.getGenres()
       .subscribe(
         (response: { genres: Genres[] }): void => {
           this.genres = response.genres;
@@ -43,16 +50,19 @@ export class MoviesMenuComponent implements OnInit {
 
   selectKind(kind: string) {
     this.menuOptionSelected = kind;
+    this.showOptions = !this.showOptions;
+    this.genresMenu = false;
     this.kindSelected.emit(kind);
     console.log(kind, 'in movies menu')
   }
 
   selectGenre(genreId: number, genreName: string) {
     this.menuOptionSelected = 'browse_by_genre';
+    this.showOptions = !this.showOptions;
+    this.genresMenu = false;
     this.genreSelected.emit(genreId);
     this.genreNameSelected.emit(genreName);
     console.log(genreName, 'in movies menu')
-    this.genresMenu = false;
   }  
 
   @HostListener('window:resize', ['$event'])
