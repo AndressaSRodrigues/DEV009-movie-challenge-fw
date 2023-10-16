@@ -1,4 +1,4 @@
-<div class="flex flex-row flex-wrap justify-center mx-5 lg:mx-20 z-0" infiniteScroll [infiniteScrollDistance]="2"
+<section class="flex flex-row flex-wrap justify-center mx-5 lg:mx-20 z-0" infiniteScroll [infiniteScrollDistance]="2"
     [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
     <h2 *ngIf="onDisplay !== undefined" class="w-full text-2xl mx-4 my-4 lg:mx-14 lg:my-10">
         {{ title }}
@@ -25,4 +25,4 @@
             <span class="ml-3">{{ show.vote_average }}</span>
         </div>
     </div>
-</div>
+</section>
