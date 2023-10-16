@@ -21,13 +21,11 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     this.route.params
       .subscribe(params => {
         this.movieId = params['id']
-        console.log(this.movieId)
 
         this.subscription = this.moviesService.getMovieDetails(this.movieId)
           .subscribe(
             (response: Movie ) => {
               this.movieDetails = response;
-              console.log(this.movieDetails)
             })
       })
   }

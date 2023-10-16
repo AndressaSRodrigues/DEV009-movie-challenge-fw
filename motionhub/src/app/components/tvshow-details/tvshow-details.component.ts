@@ -18,13 +18,11 @@ export class TvshowDetailsComponent implements OnInit {
     this.route.params
       .subscribe(params => {
         this.showId = params['id']
-        console.log(this.showId)
 
         this.tvServices.getShowDetails(this.showId)
           .subscribe(
             (response: TvShows ) => {
               this.showDetails = response;
-              console.log(this.showDetails)
             })
       })
   }

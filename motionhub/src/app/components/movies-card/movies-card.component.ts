@@ -65,7 +65,6 @@ export class MoviesCardComponent implements OnInit, OnChanges, OnDestroy {
               this.title = '';
           }
 
-          console.log(this.selectedGenreName, 'in movies card')
           if (genreId !== undefined) {
             this.title = this.selectedGenreName;
           }
@@ -90,6 +89,5 @@ export class MoviesCardComponent implements OnInit, OnChanges, OnDestroy {
 
   onScroll() {
     this.loadShows();
-    console.log(this.page)
   }
 }
