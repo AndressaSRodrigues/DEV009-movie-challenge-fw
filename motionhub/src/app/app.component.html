@@ -3,7 +3,7 @@
     <img alt="MotionHub Logo" src="../assets/mhicon.png" class="w-12 ml-5" />
   </a>
 
-  <div *ngIf="isSearchActive" class="flex flex-row justify-between items-center w-screen">
+  <div *ngIf="isSearchActive()" class="flex flex-row justify-between items-center w-screen">
 
     <div class="flex flex-row justify-between bg-gray w-64 h-8 ml-10 border border-solid border-yellow p-1 lg:p-2 lg:h-12 lg:w-1/4 lg:ml-24">
       <input type="text" placeholder="Search..." class="search" [(ngModel)]="searchQuery" class="bg-gray" />
