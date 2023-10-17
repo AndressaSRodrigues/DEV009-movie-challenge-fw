@@ -11,7 +11,10 @@ describe('MoviesService', () => {
       id: 0,
       title: 'First Movie',
       tagline: 'First movie tagline for testing.',
-      genres: 'comedy',
+      genres: {
+        id: 0,
+        name: 'Action'
+      },
       poster_path: '/abc123',
       overview: 'Great movie.',
       vote_average: 8.5,
@@ -50,7 +53,7 @@ describe('MoviesService', () => {
 
     const req = httpTestingController.expectOne(`https://api.themoviedb.org/3/movie/${kind}?api_key=6dcc09ba8ce42bb94dd75b77ed50c8f0&page=${page}`);
     expect(req.request.method).toBe('GET');
-    req.flush({ movies: mockMovies }); //flush:Simulates the asynchronous passage of time for the timers in the fakeAsync
+    req.flush({ movies: mockMovies }); // flush: simulates the asynchronous passage of time for the timers in the fakeAsync
   });
 
   it('should fetch movies by genre', () => {
@@ -80,7 +83,7 @@ describe('MoviesService', () => {
   });
 
   it('should fetch genres', () => {
-    const mockGenres = [{ id: 1, name: 'Action' }, { id: 2, name: 'Adventure' }];
+    const mockGenres = [{ id: 0, name: 'Action' }, { id: 1, name: 'Adventure' }];
 
     service.getGenres().subscribe((response) => {
       expect(response.genres).toEqual(mockGenres);
