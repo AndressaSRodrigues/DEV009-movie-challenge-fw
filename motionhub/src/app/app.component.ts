@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +13,21 @@ export class AppComponent {
 
   constructor(private router: Router) {}
 
-  isSearchActive(): boolean {
-    return this.router.url !== '/home'; 
-  }
+  isSearchActive: boolean = true;
 
+  ngOnInit() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.isSearchActive = !this.isHomeRoute();
+        console.log(this.isSearchActive)
+      }
+    });
+  }
+  
+  isHomeRoute(): boolean {
+    return this.router.url === '/home';
+  }
+  
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }

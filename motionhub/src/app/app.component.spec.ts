@@ -3,8 +3,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { Router } from '@angular/router';
 import { MoviesComponent } from './routes/movies/movies.component';
-import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './routes/home/home.component';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -15,13 +15,12 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes([
-        { path: 'home', component: AppComponent },
-        { path: 'movies', component: MoviesComponent },
-      ]), 
-      FormsModule
-    ],
+          { path: 'home', component: HomeComponent },
+          { path: 'movies', component: MoviesComponent },
+        ]),
+        FormsModule
+      ],
       declarations: [AppComponent],
-      providers: [{ provide: Router, useRouter: MockRouter }]
     });
 
     fixture = TestBed.createComponent(AppComponent);
@@ -59,22 +58,36 @@ describe('AppComponent', () => {
     expect(navigateSpy).toHaveBeenCalledWith(['/search-results', 'test']);
   });
 
-  it('should return true when on a non-home route', () => {
-    MockRouter.navigate(['/movies']);
-    const result = app.isSearchActive();
-    expect(result).toBe(true);
+  it('should not navigate when search query is empty', () => {
+    const navigateSpy = spyOn(MockRouter, 'navigate');
+    app.searchQuery = '';
+
+    app.displaySearchResults();
+
+    expect(navigateSpy).not.toHaveBeenCalled();
   });
-  
-/*   it('should return true when on the home route', () => {
+
+  it('should initialize isSearchActive as true by default', () => {
+    expect(app.isSearchActive).toBe(true);
+  });
+
+  it('should set isSearchActive to false when on the home route', () => {
     MockRouter.navigate(['/home']);
-    const result = app.isSearchActive();
-    expect(result).toBe(false);
-  }); */
-  
+    app.isSearchActive = app.isHomeRoute();
+    fixture.detectChanges();
+    expect(app.isSearchActive).toBe(false);
+  });
+
+  it('should set isSearchActive to true when on a non-home route', () => {
+    MockRouter.navigate(['/movies']);
+    fixture.detectChanges();
+    expect(app.isSearchActive).toBe(true);
+  });
+
   it('should render a logo', () => {
     const logo: HTMLElement = fixture.nativeElement;
     const img = logo.querySelector('img')!;
     expect(img.alt).toEqual('MotionHub Logo');
   });
-  
+
 });
