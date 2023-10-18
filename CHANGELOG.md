@@ -1,5 +1,57 @@
 # Changelog
 
+## 1.0.1 - 2023-10-17
+
+### Sprint Learnings
+
+During this sprint, I acquired valuable knowledge, including:
+
+-Refactoring and modularizing my code for better practices.
+-Testing Angular components and services with Jasmine and Karma.
+
+### Added
+
+- Added the TV Shows route.
+- Added different kinds for TV Shows, TV Shows details and browse TV Shows by genre.
+- Added tests for main components.
+- Infinite scrolling.
+
+### Changed
+
+- Refactored my functions to have a more organized code.
+- Reorganized my components for clearer understanding.
+
+### Fixed
+
+- Tailwind classes to change the MovieDetails view, now the poster is fixed.
+
+### Removed
+
+- Unnecessary functions and lenghty templates.
+
+### Commit Log
+
+- Added tests for SearchService and MovieDetails
+- Changed position fixed for poster
+- Fixed AppComponent tests
+- Added moviesService tests
+- Added tests for movies menu and services(partial)
+- Added app tests
+- Added unsubscribe to movie related components
+- Fixed scrolling per genre
+- Organized movies route and components
+- Movies components refactored
+- Reorganized directories
+- Fixed genres menu style
+- Fixed on hover animation for search results
+- Fixed routes for search results on click
+- Added tvshows details
+- Passed genre name from menu to card
+- TV shows refactored
+- Refactored style for movies
+- Fixed loading and genre names
+- Refactored request functions
+
 ## 1.0.1 - 2023-10-11
 
 ### Sprint Learnings

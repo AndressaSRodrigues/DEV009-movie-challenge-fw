@@ -56,7 +56,7 @@ describe('MovieDetailsComponent', () => {
   });
 
   it('should fetch the details of the movie according to the ID', fakeAsync(() => {
-    const getMovieDetailsSpy = spyOn(service, 'getMovieDetails').and.returnValue(of(mockDetails as Movie));
+    const getMovieDetailsSpy = spyOn(service, 'getMovieDetails').and.returnValue(of(mockDetails));
   
     component.ngOnInit();
     tick();
