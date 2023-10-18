@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 })
 
 export class SearchResultsComponent implements OnInit, OnDestroy {
-  searchQuery: string = '';
+  searchQuery!: string;
   searchResults: any[] = [];
   message: string = 'Sorry... we couldn\'t find what you\'re looking for 😥';
 

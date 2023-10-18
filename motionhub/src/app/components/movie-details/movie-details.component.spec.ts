@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 
 import { MovieDetailsComponent } from './movie-details.component';
 import { RouterTestingModule } from '@angular/router/testing';
-// import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { MoviesService } from 'src/app/services/moviesService/movies.service';
 import { HttpClientModule } from '@angular/common/http';
 import { of } from 'rxjs';
@@ -65,4 +64,11 @@ describe('MovieDetailsComponent', () => {
     expect(component.movieDetails).toEqual(mockDetails);
   }));
   
+  it('should unsubscribe in ngOnDestroy', () => {
+    spyOn(component.subscription, 'unsubscribe');
+
+    component.ngOnDestroy();
+
+    expect(component.subscription.unsubscribe).toHaveBeenCalled();
+  });
 });

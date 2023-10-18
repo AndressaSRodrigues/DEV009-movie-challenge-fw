@@ -14,8 +14,8 @@ export class MoviesCardComponent implements OnInit, OnChanges, OnDestroy {
   @Input() selectedGenre: number | undefined = undefined;
   @Input() selectedGenreName: string | undefined = undefined;
 
-  title: string | undefined = 'New & Popular'
-  onDisplay: string | undefined = 'popular'
+  title: string | undefined = 'New & Popular';
+  onDisplay: string | undefined = 'popular';
   currentMovies: Movie[] = [];
 
   genreTitles: Genres[] = [];
