@@ -92,14 +92,14 @@ describe('MoviesCardComponent', () => {
     expect(component.title).toEqual(component.selectedGenreName);
   });
 
-  it('should load shows and update component properties', () => {
+  it('should load Movies and update component properties', () => {
     const getMoviesSpy = spyOn(service, 'getMovies').and.returnValue(of({ results: mockMovies }));
     
     component.type = 'top_rated';
     component.page = 1;
     component.selectedGenre = undefined;
 
-    component.loadShows();
+    component.loadMovies();
     
     expect(getMoviesSpy).toHaveBeenCalledWith('top_rated', 2, undefined);
     expect(component.page).toBe(2);
@@ -107,9 +107,17 @@ describe('MoviesCardComponent', () => {
   });
   
   it('should call loadShows when onScroll is triggered', () => {
-    const loadShowsSpy = spyOn(component, 'loadShows');
+    const loadMoviesSpy = spyOn(component, 'loadMovies');
     component.onScroll();
-    expect(loadShowsSpy).toHaveBeenCalled();
+    expect(loadMoviesSpy).toHaveBeenCalled();
+  });
+
+  it('should unsubscribe in ngOnDestroy', () => {
+    spyOn(component.subscription, 'unsubscribe');
+
+    component.ngOnDestroy();
+
+    expect(component.subscription.unsubscribe).toHaveBeenCalled();
   });
 
 });

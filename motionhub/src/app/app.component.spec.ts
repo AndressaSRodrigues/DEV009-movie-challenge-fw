@@ -89,5 +89,5 @@ describe('AppComponent', () => {
     const img = logo.querySelector('img')!;
     expect(img.alt).toEqual('MotionHub Logo');
   });
-
+ 
 });

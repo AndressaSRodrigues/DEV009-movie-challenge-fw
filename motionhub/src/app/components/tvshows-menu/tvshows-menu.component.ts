@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, OnInit, HostListener } from '@angular/core';
 import { TvshowsService } from 'src/app/services/tvShowsService/tvshows.service';
 import { Genres } from 'src/app/interfaces/genres.interface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'tvshows-menu',
@@ -26,14 +27,20 @@ export class TvshowsMenuComponent implements OnInit {
     this.showOptions = !this.showOptions;
   }
 
+  subscription: Subscription = new Subscription();
+
   constructor(private tvService: TvshowsService) { }
 
   ngOnInit(): void {
     this.displayGenres();
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   displayGenres() {
-    this.tvService.getGenres()
+    this.subscription = this.tvService.getGenres()
       .subscribe(
         (response) => {
           this.genres = response;

@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { TvshowsService } from 'src/app/services/tvShowsService/tvshows.service';
 import { Genres } from '../../interfaces/genres.interface';
 import { TvShows } from 'src/app/interfaces/tvshow.interface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'tvshows-card',
@@ -21,7 +22,9 @@ export class TvshowsCardComponent implements OnInit, OnChanges {
 
   page: number = 1;
   loading: boolean = false;
-  type: string | undefined = this.selectedKind; 
+  type: string | undefined = this.selectedKind;
+
+  subscription: Subscription = new Subscription();
 
   constructor(private tvServices: TvshowsService) {}
 
@@ -36,9 +39,13 @@ export class TvshowsCardComponent implements OnInit, OnChanges {
       ? this.fetchTvShows(undefined, this.page, this.selectedGenre)
       : null;
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
   
   fetchTvShows(kind: string | undefined, page: number, genreId?: number | undefined): void {
-      this.tvServices.getTvShows(kind, page, genreId)
+      this.subscription = this.tvServices.getTvShows(kind, page, genreId)
         .subscribe((response: { results: TvShows[] }) => {
           this.tvshows = response.results;
           this.onDisplay = kind;

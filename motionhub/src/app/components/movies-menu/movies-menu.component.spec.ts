@@ -83,4 +83,12 @@ describe('MoviesMenuComponent', () => {
     expect(component.genreNameSelected.emit).toHaveBeenCalledWith(genreName);
   });
 
+  it('should unsubscribe in ngOnDestroy', () => {
+    spyOn(component.subscription, 'unsubscribe');
+
+    component.ngOnDestroy();
+
+    expect(component.subscription.unsubscribe).toHaveBeenCalled();
+  });
+
 });

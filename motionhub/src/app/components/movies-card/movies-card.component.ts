@@ -71,7 +71,7 @@ export class MoviesCardComponent implements OnInit, OnChanges, OnDestroy {
         });
   }
 
-  loadShows() {
+  loadMovies() {
     if (this.loading) {
       return;
     }
@@ -88,6 +88,6 @@ export class MoviesCardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onScroll() {
-    this.loadShows();
+    this.loadMovies();
   }
 }
