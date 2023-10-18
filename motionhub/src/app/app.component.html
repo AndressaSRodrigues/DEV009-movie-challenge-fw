@@ -5,17 +5,17 @@
 
   <div *ngIf="isSearchActive" class="flex flex-row justify-between items-center w-screen">
 
-    <div class="flex flex-row justify-between bg-gray w-64 h-8 ml-10 border border-solid border-yellow p-1 lg:p-2 lg:h-12 lg:w-1/4 lg:ml-24">
+    <div class="flex flex-row justify-between bg-gray w-64 h-8 ml-10 border border-solid border-yellow p-1 lg:p-2 lg:h-12 lg:w-1/2 lg:ml-24">
       <input type="text" placeholder="Search..." class="search" [(ngModel)]="searchQuery" class="bg-gray" />
       <img src="../assets/search-icon.svg" alt="Seach icon" width="20" (click)="displaySearchResults()" />
     </div>
 
-    <div class="cursor-pointer ml-8 mr-0 lg:hidden" (click)="toggleMenu()">
+    <div class="cursor-pointer ml-5 mr-8 lg:hidden" (click)="toggleMenu()">
       <img *ngIf="!isMenuOpen" src="../assets/menu.svg" alt="Open menu" width="35" />
-      <img *ngIf="isMenuOpen" src="../assets/close.svg" alt="Close menu" width="30">
+      <img *ngIf="isMenuOpen" src="../assets/close.svg" alt="Close menu" width="35">
     </div>
 
-    <div class="hidden flex flex-col absolute bg-dark p-4 top-16 right-0 h-full w-full font-koulen text-5xl lg:text-2xl lg:flex lg:flex-row lg:top-6 lg:h-8 lg:w-fit lg:p-0 z-20" [class.hidden]="!isMenuOpen">
+    <div class="hidden flex flex-col absolute bg-dark p-4 top-16 right-0 h-full w-full font-koulen text-5xl lg:text-2xl lg:flex lg:flex-row lg:top-6 lg:h-8 lg:w-fit lg:p-0 lg:mr-8 z-20" [class.hidden]="!isMenuOpen">
       <a href="/home" class="hover:text-yellow duration-500 mx-8 my-4 lg:my-0">Home</a>
       <a href="/movies" class="hover:text-yellow duration-500 mx-8 my-4 lg:my-0">Movies</a>
       <a href="/tvshows" class="hover:text-yellow duration-500 mx-8 my-4 lg:my-0">TV Shows</a>

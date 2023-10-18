@@ -6,6 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 describe('MoviesService', () => {
   let service: MoviesService;
   let httpTestingController: HttpTestingController;
+  
   const mockMovies = [
     {
       id: 0,

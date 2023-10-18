@@ -31,4 +31,22 @@ describe('MoviesComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should set selectedKind and clear selectedGenre', () => {
+    component.onKindSelected('Comedy');
+    expect(component.selectedKind).toBe('Comedy');
+    expect(component.selectedGenre).toBeUndefined();
+  });
+  
+  it('should set selectedGenre and clear selectedKind', () => {
+    component.onGenreSelected(123);
+    expect(component.selectedGenre).toBe(123);
+    expect(component.selectedKind).toBeUndefined();
+  });
+  
+  it('should set selectedGenreName', () => {
+    component.onGenreNameSelected('Drama');
+    expect(component.selectedGenreName).toBe('Drama');
+  });
+  
 });
