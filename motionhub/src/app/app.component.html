@@ -6,7 +6,7 @@
   <div *ngIf="isSearchActive" class="flex flex-row justify-between items-center w-screen">
 
     <div class="flex flex-row justify-between bg-gray w-64 h-8 ml-10 border border-solid border-yellow p-1 lg:p-2 lg:h-12 lg:w-[20rem] lg:ml-24">
-      <input type="text" placeholder="Search..." class="search" [(ngModel)]="searchQuery" class="bg-gray" />
+      <input type="text" placeholder="Search..." class="search" [(ngModel)]="searchQuery" class="w-full bg-gray" />
       <img src="../assets/search-icon.svg" alt="Seach icon" width="20" (click)="displaySearchResults()" />
     </div>
 
@@ -27,7 +27,7 @@
   <router-outlet></router-outlet>
 </main>
 
-<footer class="w-screen flex flex-row justify-center items-center p-2">
+<footer class="w-screen flex flex-row justify-center items-center mt-1 lg:mt-4">
   <span class="text-sm font-koulen text-dark mr-4">© MotionHub</span>
   <a href="https://github.com/AndressaSRodrigues" class="mr-4">
     <img src="../assets/github-icon.svg" alt="GitHub" width="30" />

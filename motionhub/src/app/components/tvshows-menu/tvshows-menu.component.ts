@@ -50,14 +50,17 @@ export class TvshowsMenuComponent implements OnInit {
 
   selectKind(kind: string) {
     this.menuOptionSelected = kind;
+    this.showOptions = !this.showOptions;
+    this.genresMenu = false;
     this.kindSelected.emit(kind);
   }
 
   selectGenre(genreId: number, genreName: string) {
     this.menuOptionSelected = 'browse_by_genre';
+    this.showOptions = !this.showOptions;
+    this.genresMenu = false;
     this.genreSelected.emit(genreId);
     this.genreNameSelected.emit(genreName);
-    this.genresMenu = false;
   }  
 
   @HostListener('window:resize', ['$event'])

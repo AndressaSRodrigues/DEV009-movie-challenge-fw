@@ -15,18 +15,18 @@
         <button [ngClass]="menuOptionSelected === 'top_rated' ? 'text-yellow overline' : 'text-white'"
             (click)="selectKind('top_rated')">Top Rated</button>
 
-        <button [ngClass]="menuOptionSelected === undefined ? 'text-yellow overline' : 'text-white'"
+        <button [ngClass]="menuOptionSelected === 'browse_by_genre' ? 'text-yellow overline' : 'text-white'"
             (click)="toggleGenresMenu()">Browse by genre</button>
 
     </div>
 
-    <div class="hidden flex flex-col flex-wrap bg-gray text-lg absolute h-64 w-96 top-72 left-8 justify-start p-2 lg:w-96 lg:top-40 lg:left-2/3 border border-solid border-yellow z-10"
-        [class.hidden]="!genresMenu">
+    <div class="hidden flex flex-col flex-wrap bg-gray text-lg absolute h-[19rem] w-[18rem] top-36 left-8 justify-start p-2 lg:w-96 lg:top-40 lg:left-2/3 border border-solid border-yellow z-10"
+        [class.hidden]="!genresMenu" (click)="toggleOptions()">
         <div class="h-full p-1 cursor-pointer">
             <img src="../../../assets/close.svg" alt="Close" width="15" (click)="toggleGenresMenu()">
         </div>
 
-        <div *ngFor="let genre of genres">
+        <div *ngFor="let genre of genres" class="flex flex-col flex-wrap">
                 <span class="text-1xl cursor-pointer hover:text-yellow"
                     (click)="selectGenre(genre.id, genre.name)">{{ genre.name }}</span>
         </div>
