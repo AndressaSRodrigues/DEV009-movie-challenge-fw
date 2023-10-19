@@ -27,6 +27,10 @@ export class MoviesMenuComponent implements OnInit, OnDestroy {
     this.showOptions = !this.showOptions;
   }
 
+  closeOptions() {
+    this.showOptions = false;
+  }
+
   subscription: Subscription = new Subscription();
 
   constructor(private moviesService: MoviesService) {}

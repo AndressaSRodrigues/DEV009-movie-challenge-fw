@@ -47,6 +47,11 @@ describe('MoviesMenuComponent', () => {
     expect(component.genresMenu).toBe(false);
   });
 
+  it('should close the options menu when the genres menu is open', () => {
+    component.closeOptions();
+    expect(component.showOptions).toBe(false);
+  })
+
   it('should toggle the menu with options', () => {
     component.toggleOptions();
     expect(component.showOptions).toBe(true);

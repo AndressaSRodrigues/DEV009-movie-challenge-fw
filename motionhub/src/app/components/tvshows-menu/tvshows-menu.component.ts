@@ -27,6 +27,10 @@ export class TvshowsMenuComponent implements OnInit {
     this.showOptions = !this.showOptions;
   }
 
+  closeOptions() {
+    this.showOptions = false;
+  }
+
   subscription: Subscription = new Subscription();
 
   constructor(private tvService: TvshowsService) { }

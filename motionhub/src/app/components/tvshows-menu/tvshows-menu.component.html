@@ -16,7 +16,7 @@
     </div>
 
     <div class="hidden flex flex-col flex-wrap bg-gray text-lg absolute h-[19rem] w-[20rem] top-36 left-8 justify-start p-2 lg:w-96 lg:top-40 lg:left-2/3 border border-solid border-yellow z-10"
-        [class.hidden]="!genresMenu" (click)="toggleOptions()">
+        [class.hidden]="!genresMenu" (click)="closeOptions()">
         
         <div class="h-full p-1 cursor-pointer">
             <img src="../../../assets/close.svg" alt="Close" width="15" (click)="toggleGenresMenu()">
